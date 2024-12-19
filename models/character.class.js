@@ -43,6 +43,8 @@ class Character extends MovableObject {
   world;
   walking_sound = new Audio("audio/walk.mp3");
   jump_sound = new Audio("audio/jump.mp3");
+  hurt_sound = new Audio("audio/hurt.mp3");
+  dead_sound = new Audio("audio/dead.mp3")
 
   constructor() {
     super().loadImage(
@@ -77,9 +79,11 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.isHurt()) {
         this.playAnimation(this.images_hurt);
+        this.hurt_sound.play();
       }
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
+        this.dead_sound.play();
       }
       if (this.isAboveGround()) {
         this.playAnimation(this.images_jumping);

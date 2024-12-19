@@ -1,4 +1,6 @@
 class ThrowableObject extends MovableObject {
+  throw_sound = new Audio('audio/bottle-pop.mp3');
+
   constructor(x, y) {
     super();
     this.x = x;
@@ -12,10 +14,11 @@ class ThrowableObject extends MovableObject {
   }
 
   throw() {
-    this.speedY = 30;
+    this.speedY = 20;
+    this.throw_sound.play();
     this.applyGravity();
     setInterval(() => {
-      this.x += 10;
+      this.x += 20;
     }, 25);
   }
 }

@@ -20,11 +20,16 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
+    const hitboxX = this.x;
+    const hitboxY = this.y + 150;
+    const hitboxWidth = this.width - 30; 
+    const hitboxHeight = this.height - 150; 
+  
     return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
-      this.x < mo.x &&
-      this.y < mo.y + mo.height
+      hitboxX + hitboxWidth > mo.x && 
+      hitboxY + hitboxHeight > mo.y &&
+      hitboxX < mo.x + mo.width &&    
+      hitboxY < mo.y + mo.height      
     );
   }
 
@@ -60,6 +65,14 @@ class MovableObject extends DrawableObject {
 
   moveLeft() {
     this.x -= this.speed;
+  }
+
+  moveRandom(){
+
+    if (this.x>2200) {
+      this.x -= this.speed + 1;
+    }
+    this.moveRight()
   }
 
   jump() {

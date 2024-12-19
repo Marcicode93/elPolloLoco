@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new Statusbar();
+  // coinBar = new Coinbar();
   throwableObjects = [];
 
   constructor(canvas) {
@@ -43,7 +44,7 @@ class World {
           this.statusBar.setPercentage(this.character.energy);
         }
       });
-    }, 200);
+    }, 1000);
   }
 
   draw() {
@@ -54,6 +55,10 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
+
+    // this.ctx.translate(-this.camera_x, 0);
+    // this.addToMap(this.coinBar);
+    // this.ctx.translate(this.camera_x, 0);
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);

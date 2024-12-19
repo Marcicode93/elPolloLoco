@@ -25,6 +25,11 @@ class Endboss extends MovableObject{
 
       animate(){
         setInterval(() => {
+          this.moveRandom();
+          // this.walking_sound.play();
+        }, 1000 / 60);
+
+        setInterval(() => {
             this.playAnimation(this.images_walking)
           }, 200);
       }
