@@ -13,10 +13,11 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
+    if (this instanceof ThrowableObject) {
+      return true;
+    }
     return this.y < 40;
   }
-
- 
 
   isColliding(mo) {
     return (
@@ -60,6 +61,7 @@ class MovableObject extends DrawableObject {
   moveLeft() {
     this.x -= this.speed;
   }
+
   jump() {
     this.speedY = 30;
     this.otherDirection = true;
