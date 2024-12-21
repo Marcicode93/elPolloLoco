@@ -6,7 +6,28 @@ function init() {
   world = new World(canvas);
 }
 
-// game_sound= new Audio('audio/background-music.mp3');
+
+
+function startGame(){
+console.log('started Game');
+initLevel();
+
+}
+
+function stopGame(){
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  gameOverScreen();
+}
+
+function gameOverScreen(){
+let gameOver=document.getElementById('game-over-screen');
+gameOver.classList.toggle('display-none');
+game_over_sound.play();
+}
+
+// toDo
+game_sound= new Audio('audio/background-music.mp3');
+game_over_sound = new Audio('audio/game-over-jingle.mp3')
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {

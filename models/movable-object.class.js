@@ -22,14 +22,23 @@ class MovableObject extends DrawableObject {
   isColliding(mo) {
     const hitboxX = this.x;
     const hitboxY = this.y + 150;
-    const hitboxWidth = this.width - 30; 
-    const hitboxHeight = this.height - 150; 
-  
+    const hitboxWidth = this.width - 30;
+    const hitboxHeight = this.height - 150;
+
     return (
-      hitboxX + hitboxWidth > mo.x && 
+      hitboxX + hitboxWidth > mo.x &&
       hitboxY + hitboxHeight > mo.y &&
-      hitboxX < mo.x + mo.width &&    
-      hitboxY < mo.y + mo.height      
+      hitboxX < mo.x + mo.width &&
+      hitboxY < mo.y + mo.height
+    );
+  }
+
+  isJumpingOn(mo) {
+    return (
+      this.speedY < 0 && // Charakter fällt nach unten
+      this.y + this.height <= mo.y + 20 && // Charakter ist oberhalb des Objekts
+      this.x + this.width > mo.x && // Horizontale Überlappung (rechts)
+      this.x < mo.x + mo.width // Horizontale Überlappung (links)
     );
   }
 
@@ -48,6 +57,7 @@ class MovableObject extends DrawableObject {
 
     return timepassed < 1;
   }
+
   isDead() {
     return this.energy == 0;
   }
@@ -67,12 +77,11 @@ class MovableObject extends DrawableObject {
     this.x -= this.speed;
   }
 
-  moveRandom(){
-
-    if (this.x>2200) {
+  moveRandom() {
+    if (this.x > 2200) {
       this.x -= this.speed + 1;
     }
-    this.moveRight()
+    this.moveRight();
   }
 
   jump() {

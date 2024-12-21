@@ -44,7 +44,7 @@ class Character extends MovableObject {
   walking_sound = new Audio("audio/walk.mp3");
   jump_sound = new Audio("audio/jump.mp3");
   hurt_sound = new Audio("audio/hurt.mp3");
-  dead_sound = new Audio("audio/dead.mp3")
+  dead_sound = new Audio("audio/dead.mp3");
 
   constructor() {
     super().loadImage(
@@ -57,7 +57,7 @@ class Character extends MovableObject {
     this.applyGravity();
     this.animate();
   }
-  
+
   animate() {
     setInterval(() => {
       if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
@@ -84,6 +84,7 @@ class Character extends MovableObject {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
         this.dead_sound.play();
+        stopGame();
       }
       if (this.isAboveGround()) {
         this.playAnimation(this.images_jumping);

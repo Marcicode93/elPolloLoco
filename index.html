@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="img_pollo_locco/img/6_salsa_bottle/1_salsa_bottle_on_ground.png" type="image/x-icon">
+    <link rel="stylesheet" href="fonts.css" />
+    <link
+      rel="shortcut icon"
+      href="img_pollo_locco/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"
+      type="image/x-icon"
+    />
     <title>Document</title>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -21,10 +26,27 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
   </head>
-  
+
   <body onload="init()">
     <h1>EL POLLO LOCO</h1>
 
     <canvas id="canvas" width="720" height="480"> </canvas>
+
+    <div id="start-screen" class="display-none">
+      <img
+        src="img_pollo_locco/img/9_intro_outro_screens/start/startscreen_2.png"
+        class="game-over-img"
+        alt="start-screen-icon"
+      />
+      <button class="btn" onclick="startGame()">Try again!</button>
+    </div>
+    <div id="game-over-screen" class="display-none">
+      <img
+        src="img_pollo_locco/img/9_intro_outro_screens/game_over/game over!.png"
+        class="game-over-img"
+        alt="game-over-icon"
+      />
+      <button class="btn" onclick="startGame()">Try again!</button>
+    </div>
   </body>
 </html>
