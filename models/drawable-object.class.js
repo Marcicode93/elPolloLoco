@@ -4,7 +4,6 @@ class DrawableObject {
   currentImage = 0;
   x = 120;
   y = 280;
-
   width = 100;
   height = 150;
 
@@ -25,11 +24,10 @@ class DrawableObject {
     ) {
       ctx.beginPath();
       if (this instanceof Character) {
-        ctx.rect(this.x, this.y+150, this.width-30, this.height-150);
-      } else if (this instanceof Endboss){
-        ctx.rect(this.x, this.y+100, this.width, this.height-120);
-      }
-      else {
+        ctx.rect(this.x, this.y + 150, this.width - 30, this.height - 150);
+      } else if (this instanceof Endboss) {
+        ctx.rect(this.x, this.y + 100, this.width, this.height - 120);
+      } else {
         ctx.rect(this.x, this.y, this.width, this.height);
       }
     }

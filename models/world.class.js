@@ -31,7 +31,10 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.d) {
-      let bottle= new ThrowableObject(this.character.x+100,this.character.y+100)
+      let bottle = new ThrowableObject(
+        this.character.x + 100,
+        this.character.y + 100
+      );
       this.throwableObjects.push(bottle);
     }
   }
@@ -43,8 +46,25 @@ class World {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
         }
+
+        this.throwableObjects.forEach((bottle) => {
+          if (bottle.isColliding(enemy)) {
+            enemy.hit(); // Treffer beim Gegner registrieren
+            this.removeBottle(bottle); // Flasche entfernen
+            console.log("boooooss hiiiit");
+            enemy.energy;
+            console.log(enemy.energy);
+          }
+        });
       });
-    }, 1000);
+    }, 100);
+  }
+
+  removeBottle(bottle) {
+    const index = this.throwableObjects.indexOf(bottle);
+    if (index > -1) {
+      this.throwableObjects.splice(index, 1);
+    }
   }
 
   draw() {

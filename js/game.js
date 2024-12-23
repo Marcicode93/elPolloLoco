@@ -7,6 +7,8 @@ function init() {
 
 function startGame() {
   gameStart = document.getElementById("start-screen");
+  let gameOver = document.getElementById("game-over-screen");
+  gameOver.classList.add("display-none");
   gameStart.classList.add("display-none");
   initLevel();
   world = new World(canvas);

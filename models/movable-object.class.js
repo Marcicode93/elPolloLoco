@@ -36,10 +36,10 @@ class MovableObject extends DrawableObject {
 
   isJumpingOn(mo) {
     return (
-      this.speedY < 0 && // Charakter fällt nach unten
-      this.y + this.height <= mo.y + 20 && // Charakter ist oberhalb des Objekts
-      this.x + this.width > mo.x && // Horizontale Überlappung (rechts)
-      this.x < mo.x + mo.width // Horizontale Überlappung (links)
+      this.speedY < 0 && 
+      this.y + this.height <= mo.y + 20 &&
+      this.x + this.width > mo.x && 
+      this.x < mo.x + mo.width 
     );
   }
 
@@ -84,6 +84,7 @@ class MovableObject extends DrawableObject {
       this.isMoving = true;
     } else if (this.x <= 2200) {
       this.isMoving = false;
+      this.moveRight();
     }
   }
 
