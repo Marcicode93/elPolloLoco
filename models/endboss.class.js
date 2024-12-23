@@ -19,24 +19,26 @@ class Endboss extends MovableObject {
     "img_pollo_locco/img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
 
-  hadFirstContact = 0;
+  hadFirstContact = true;
 
   constructor() {
     super().loadImage(this.images_alert[0]);
     this.loadImages(this.images_alert);
+    this.loadImages(this.images_walking);
     this.x = 2500;
+    this.isMoving = false;
     this.animate();
   }
 
   animate() {
-
     setInterval(() => {
       this.moveRandom();
+      if (this.isMoving) {
+        this.playAnimation(this.images_walking);
+      } else {
+        this.playAnimation(this.images_alert);
+      }
       // this.walking_sound.play();
-    }, 1000 / 60);
-
-    setInterval(() => {
-      this.playAnimation(this.images_alert);
     }, 200);
   }
 }

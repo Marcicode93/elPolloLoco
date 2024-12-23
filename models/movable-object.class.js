@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 2.5;
   energy = 100;
+  isMoving = false;
 
   applyGravity() {
     setInterval(() => {
@@ -79,9 +80,11 @@ class MovableObject extends DrawableObject {
 
   moveRandom() {
     if (this.x > 2200) {
-      this.x -= this.speed + 1;
+      this.x -= this.speed + 10;
+      this.isMoving = true;
+    } else if (this.x <= 2200) {
+      this.isMoving = false;
     }
-    this.moveRight();
   }
 
   jump() {
