@@ -3,7 +3,6 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2.5;
-  energy = 100;
   isMoving = false;
 
   applyGravity() {
@@ -36,10 +35,10 @@ class MovableObject extends DrawableObject {
 
   isJumpingOn(mo) {
     return (
-      this.speedY < 0 && 
+      this.speedY < 0 &&
       this.y + this.height <= mo.y + 20 &&
-      this.x + this.width > mo.x && 
-      this.x < mo.x + mo.width 
+      this.x + this.width > mo.x &&
+      this.x < mo.x + mo.width
     );
   }
 

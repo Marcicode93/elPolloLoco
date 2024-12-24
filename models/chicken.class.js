@@ -4,20 +4,20 @@ class Chicken extends MovableObject {
   width = 100;
   energy = 1;
   images_walking = [
-    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
   images_dead = [
-    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/2_dead/dead.png",
+    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/2_dead/dead.png",
   ];
 
   walking_sound = new Audio("audio/chicken.mp3");
 
   constructor(character) {
     super().loadImage(
-      "../img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
+      "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
     );
     this.character = character;
     this.loadImages(this.images_walking);
@@ -35,11 +35,11 @@ class Chicken extends MovableObject {
 
     setInterval(() => {
       if (this.isJumpingOn(this)) {
-        this .hit();
+        this.hit();
         if (chicken.isDead()) {
           console.log("Chicken ist tot!");
         }
-        // Charakter springt zurück nach oben, um eine visuelle Rückmeldung zu geben
+
         character.speedY = 15;
       }
     }, 100);

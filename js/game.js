@@ -8,15 +8,22 @@ function init() {
 function startGame() {
   gameStart = document.getElementById("start-screen");
   let gameOver = document.getElementById("game-over-screen");
+  let win = document.getElementById("win-screen")
+  win.classList.add("display-none")
   gameOver.classList.add("display-none");
   gameStart.classList.add("display-none");
   initLevel();
   world = new World(canvas);
 }
 
-function stopGame() {
+function stopGameOver() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
   gameOverScreen();
+}
+
+function stopGame() {
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  winScreen();
 }
 
 function gameOverScreen() {
@@ -25,9 +32,16 @@ function gameOverScreen() {
   game_over_sound.play();
 }
 
+function winScreen() {
+  let win = document.getElementById("win-screen");
+  win.classList.toggle("display-none");
+  win_sound.play();
+}
+
 // toDo
 // game_sound = new Audio("audio/background-music.mp3");
 game_over_sound = new Audio("audio/game-over-jingle.mp3");
+win_sound = new Audio("audio/win.mp3");
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {

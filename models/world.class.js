@@ -25,6 +25,9 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
+      this.checkCollisionsEndboss();
+      this.checkBottleCollisions();
+      this.checkBottleCollisionsEndboss();
       this.checkThrowObjects();
     }, 200);
   }
@@ -46,17 +49,48 @@ class World {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
         }
+      });
+    }, 100);
+  }
 
+  checkCollisionsEndboss() {
+    setInterval(() => {
+        if (this.character.isColliding(this.level.endboss)) {
+          this.character.hit();
+          this.statusBar.setPercentage(this.character.energy);
+        }
+    }, 100);
+  }
+
+  checkBottleCollisions() {
+    setInterval(() => {
+      this.level.enemies.forEach((enemy) => {
         this.throwableObjects.forEach((bottle) => {
           if (bottle.isColliding(enemy)) {
-            enemy.hit(); // Treffer beim Gegner registrieren
-            this.removeBottle(bottle); // Flasche entfernen
-            console.log("boooooss hiiiit");
+            enemy.hit();
+            this.removeBottle(bottle);
+            console.log("enemyyyyy hiiiit");
             enemy.energy;
             console.log(enemy.energy);
           }
         });
       });
+    }, 100);
+  }
+
+  checkBottleCollisionsEndboss() {
+    setInterval(() => {
+  
+        this.throwableObjects.forEach((bottle) => {
+          if (bottle.isColliding(endboss)) {
+            endboss.isHit();
+            endboss.hit();
+            this.removeBottle(bottle);
+            console.log("boooooss hiiiit");
+            endboss.energy;
+            console.log(endboss.energy);
+          }
+        });
     }, 100);
   }
 
@@ -83,6 +117,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addToMap(this.level.endboss);
     this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);

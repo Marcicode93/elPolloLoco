@@ -8,7 +8,7 @@ class ThrowableObject extends MovableObject {
     this.height = 80;
     this.width = 60;
     super.loadImage(
-      "img_pollo_locco/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
+      "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
     );
     this.throw();
   }
