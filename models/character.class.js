@@ -3,6 +3,7 @@ class Character extends MovableObject {
   width = 180;
   y = -80;
   speed = 10;
+  energy= 100;
   images_walking = [
     "./img_pollo_locco/img/2_character_pepe/2_walk/W-21.png",
     "./img_pollo_locco/img/2_character_pepe/2_walk/W-22.png",
@@ -84,6 +85,7 @@ class Character extends MovableObject {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
         this.dead_sound.play();
+        
         stopGameOver();
       }
       if (this.isAboveGround()) {

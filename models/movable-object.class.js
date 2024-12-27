@@ -83,7 +83,6 @@ class MovableObject extends DrawableObject {
       this.isMoving = true;
     } else if (this.x <= 2200) {
       this.isMoving = false;
-      this.moveRight();
     }
   }
 
