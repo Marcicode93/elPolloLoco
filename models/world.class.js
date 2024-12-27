@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new Statusbar();
+  endbossBar = new Bossbar();
   // coinBar = new Coinbar();
   throwableObjects = [];
 
@@ -55,10 +56,10 @@ class World {
 
   checkCollisionsEndboss() {
     setInterval(() => {
-        if (this.character.isColliding(this.level.endboss)) {
-          this.character.hit();
-          this.statusBar.setPercentage(this.character.energy);
-        }
+      if (this.character.isColliding(this.level.endboss)) {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+      }
     }, 100);
   }
 
@@ -80,17 +81,15 @@ class World {
 
   checkBottleCollisionsEndboss() {
     setInterval(() => {
-  
-        this.throwableObjects.forEach((bottle) => {
-          if (bottle.isColliding(endboss)) {
-            endboss.isHit();
-            endboss.hit();
-            this.removeBottle(bottle);
-            console.log("boooooss hiiiit");
-            endboss.energy;
-            console.log(endboss.energy);
-          }
-        });
+      this.throwableObjects.forEach((bottle) => {
+        if (bottle.isColliding(endboss)) {
+          endboss.isHit();
+          endboss.hit();
+          this.endbossBar.setPercentage()
+          this.removeBottle(bottle);
+          endboss.energy;
+        }
+      });
     }, 100);
   }
 
@@ -108,6 +107,10 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
+    this.ctx.translate(this.camera_x, 0);
+
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.endbossBar);
     this.ctx.translate(this.camera_x, 0);
 
     // this.ctx.translate(-this.camera_x, 0);
