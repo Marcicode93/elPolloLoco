@@ -7,7 +7,7 @@ class World {
   camera_x = 0;
   statusBar = new Statusbar();
   endbossBar = new Bossbar();
-  // coinBar = new Coinbar();
+  coinBar = new Coinbar();
   throwableObjects = [];
 
   constructor(canvas) {
@@ -84,10 +84,12 @@ class World {
       this.throwableObjects.forEach((bottle) => {
         if (bottle.isColliding(endboss)) {
           endboss.isHit();
-          endboss.hit();
-          this.endbossBar.setPercentage()
+          endboss.hitBoss();
+          this.endbossBar.setPercentage(this.level.endboss.energy)
           this.removeBottle(bottle);
           endboss.energy;
+          console.log(endboss.energy);
+          
         }
       });
     }, 100);
@@ -113,9 +115,9 @@ class World {
     this.addToMap(this.endbossBar);
     this.ctx.translate(this.camera_x, 0);
 
-    // this.ctx.translate(-this.camera_x, 0);
-    // this.addToMap(this.coinBar);
-    // this.ctx.translate(this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.coinBar);
+    this.ctx.translate(this.camera_x, 0);
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
