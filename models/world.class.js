@@ -7,6 +7,7 @@ class World {
   camera_x = 0;
   statusBar = new Statusbar();
   endbossBar = new Bossbar();
+  coins = this.generateCoins(10);
   coinBar = new Coinbar();
   throwableObjects = [];
 
@@ -29,8 +30,42 @@ class World {
       this.checkCollisionsEndboss();
       this.checkBottleCollisions();
       this.checkBottleCollisionsEndboss();
+      this.checkCharacterCollidingCoin();
       this.checkThrowObjects();
     }, 200);
+  }
+
+  generateCoins(count) {
+    let coins = [];
+    for (let i = 0; i < count; i++) {
+      let x = Math.random() * 3000;
+      let y = Math.random() * 400 + 100;
+      coins.push(new Coin(x, y));
+    }
+    console.log(coins);
+
+    return coins;
+  }
+
+  checkCoinCollection() {
+    this.coins = this.coins.filter((coin) => {
+      if (this.checkCharacterCollidingCoin(coin)) {
+        this.coinbar.setPercentage(this.coinbar.percentage + 20); // Beispiel: 20% pro Münze
+        return false; // Entfernt die Münze aus der Welt
+      }
+      return true;
+    });
+  }
+
+  checkCharacterCollidingCoin(coin) {
+    console.log(coin);
+    
+    return (
+      this.character.x + this.character.width > coin.x &&
+      this.character.x < coin.x + coin.width &&
+      this.character.y + this.character.height > coin.y &&
+      this.character.y < coin.y + coin.height
+    );
   }
 
   checkThrowObjects() {
@@ -85,11 +120,10 @@ class World {
         if (bottle.isColliding(endboss)) {
           endboss.isHit();
           endboss.hitBoss();
-          this.endbossBar.setPercentage(this.level.endboss.energy)
+          this.endbossBar.setPercentage(this.level.endboss.energy);
           this.removeBottle(bottle);
           endboss.energy;
           console.log(endboss.energy);
-          
         }
       });
     }, 100);

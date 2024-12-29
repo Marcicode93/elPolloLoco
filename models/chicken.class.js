@@ -25,7 +25,9 @@ class Chicken extends MovableObject {
     this.x = 300 + Math.random() * 500;
     (this.speed = 0.15 + Math.random() * 0), 25;
     this.animate();
+    console.log('Character:', this.character);
   }
+
 
   animate() {
     setInterval(() => {
@@ -33,16 +35,19 @@ class Chicken extends MovableObject {
       // this.walking_sound.play();
     }, 1000 / 60);
 
-    setInterval(() => {
-      if (this.isJumpingOn(this)) {
-        this.hit();
-        if (chicken.isDead()) {
-          console.log("Chicken ist tot!");
-        }
+    // setInterval(() => {
+    //   if (this.character.isJumpingOn(this)) {
+    //     this.hit();
+    //     console.log("Chicken getroffen!");
 
-        character.speedY = 15;
-      }
-    }, 100);
+    //     if (this.energy <= 0) {
+    //       console.log("Chicken ist tot!");
+    //       this.loadImage(this.images_dead[0]); // Wechsel zu totem Hühnchen-Bild
+    //     }
+
+    //     this.character.speedY = 15; // Charakter springt zurück nach oben
+    //   }
+    // }, 100);
 
     setInterval(() => {
       this.playAnimation(this.images_walking);
