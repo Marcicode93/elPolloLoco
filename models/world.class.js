@@ -32,7 +32,7 @@ class World {
       this.checkCollisionsEndboss();
       this.checkBottleCollisions();
       this.checkBottleCollisionsEndboss();
-      this.checkCharacterCollidingCoin();
+      // this.checkCharacterCollidingCoin();
       this.checkThrowObjects();
     }, 200);
   }
@@ -60,8 +60,8 @@ class World {
     }
   
     checkCharacterCollidingCoin(coin) {
-      console.log(coin);
-      console.log(this.character);
+      // console.log(coin);
+      // console.log(this.character);
   
       return (
         this.character.x + this.character.width > coin.x &&
