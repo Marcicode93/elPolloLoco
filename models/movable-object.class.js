@@ -16,7 +16,7 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     }
-    return this.y < 40;
+    return this.y < 160;
   }
 
   isColliding(mo) {
@@ -52,7 +52,7 @@ class MovableObject extends DrawableObject {
   }
 
   hitBoss() {
-    this.energy -= 20;
+    this.energy -= 10;
     if (this.energy < 0) {
       this.energy = 0;
     } else {

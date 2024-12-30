@@ -7,8 +7,10 @@ class World {
   camera_x = 0;
   statusBar = new Statusbar();
   endbossBar = new Bossbar();
-  coins = this.generateCoins(10);
+  coins = this.generateCoins(5);
   coinBar = new Coinbar();
+  bottleBar = new Bottlebar();
+  bottles = this.generateBottles(2);
   throwableObjects = [];
 
   constructor(canvas) {
@@ -38,43 +40,59 @@ class World {
   generateCoins(count) {
     let coins = [];
     for (let i = 0; i < count; i++) {
-      let x = Math.random() * 3000;
-      let y = Math.random() * 400 + 100;
+      let x = 400 + Math.random() * 5000;
+      let y = Math.random() + 160;
       coins.push(new Coin(x, y));
     }
     console.log(coins);
 
     return coins;
   }
+  
+    checkCoinCollection() {
+      this.coins = this.coins.filter((coin) => {
+        if (this.checkCharacterCollidingCoin(coin)) {
+          this.coinBar.setPercentage(this.coinBar.percentage + 20);
+          return false;
+        }
+        return true;
+      });
+    }
+  
+    checkCharacterCollidingCoin(coin) {
+      console.log(coin);
+      console.log(this.character);
+  
+      return (
+        this.character.x + this.character.width > coin.x &&
+        this.character.x < coin.x + coin.width &&
+        this.character.y + this.character.height > coin.y &&
+        this.character.y < coin.y + coin.height
+      );
+    }
+  
+  generateBottles(count) {
+    let bottles = [];
+    for (let i = 0; i < count; i++) {
+      let x = 400 + Math.random() * 2000;
+      let y = 360;
+      bottles.push(new Bottle(x, y));
+    }
+    console.log(bottles);
 
-  checkCoinCollection() {
-    this.coins = this.coins.filter((coin) => {
-      if (this.checkCharacterCollidingCoin(coin)) {
-        this.coinbar.setPercentage(this.coinbar.percentage + 20); // Beispiel: 20% pro Münze
-        return false; // Entfernt die Münze aus der Welt
-      }
-      return true;
-    });
-  }
-
-  checkCharacterCollidingCoin(coin) {
-    console.log(coin);
-    
-    return (
-      this.character.x + this.character.width > coin.x &&
-      this.character.x < coin.x + coin.width &&
-      this.character.y + this.character.height > coin.y &&
-      this.character.y < coin.y + coin.height
-    );
+    return bottles;
   }
 
   checkThrowObjects() {
-    if (this.keyboard.d) {
+    if (this.keyboard.d && this.bottleBar.percentage > 0) {
       let bottle = new ThrowableObject(
         this.character.x + 100,
         this.character.y + 100
       );
       this.throwableObjects.push(bottle);
+      this.bottleBar.setPercentage(this.bottleBar.percentage - 20);
+    } else if (this.keyboard.d && this.bottleBar.percentage === 0) {
+      return false;
     }
   }
 
@@ -105,9 +123,7 @@ class World {
           if (bottle.isColliding(enemy)) {
             enemy.hit();
             this.removeBottle(bottle);
-            console.log("enemyyyyy hiiiit");
             enemy.energy;
-            console.log(enemy.energy);
           }
         });
       });
@@ -123,7 +139,6 @@ class World {
           this.endbossBar.setPercentage(this.level.endboss.energy);
           this.removeBottle(bottle);
           endboss.energy;
-          console.log(endboss.energy);
         }
       });
     }, 100);
@@ -153,6 +168,12 @@ class World {
     this.addToMap(this.coinBar);
     this.ctx.translate(this.camera_x, 0);
 
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.bottleBar);
+    this.ctx.translate(this.camera_x, 0);
+
+    this.addObjectsToMap(this.coins);
+    this.addObjectsToMap(this.bottles);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
