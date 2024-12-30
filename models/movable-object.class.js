@@ -87,10 +87,15 @@ class MovableObject extends DrawableObject {
   }
 
   moveRandom() {
-    if (this.x > 2200) {
-      this.x -= this.speed + 10;
+    const minX = 2000;
+    const maxX = 2500;
+    const direction = Math.random() < 0.5 ? -1 : 1;
+
+    const nextX = this.x + direction * (this.speed + Math.random() * 50);
+    if (nextX >= minX && nextX <= maxX) {
+      this.x = nextX;
       this.isMoving = true;
-    } else if (this.x <= 2200) {
+    } else {
       this.isMoving = false;
     }
   }

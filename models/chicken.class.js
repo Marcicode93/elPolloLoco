@@ -42,10 +42,10 @@ class Chicken extends MovableObject {
 
     //     if (this.energy <= 0) {
     //       console.log("Chicken ist tot!");
-    //       this.loadImage(this.images_dead[0]); // Wechsel zu totem Hühnchen-Bild
+    //       this.loadImage(this.images_dead[0]);
     //     }
 
-    //     this.character.speedY = 15; // Charakter springt zurück nach oben
+    //     this.character.speedY = 15;
     //   }
     // }, 100);
 

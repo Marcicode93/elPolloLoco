@@ -1,8 +1,10 @@
 class Endboss extends MovableObject {
-  height = 500;
-  width = 300;
-  y = -35;
+  height = 400;
+  width = 200;
+  y = 65;
   energy = 100;
+  attackSpeed = 30;
+  attackCooldown = false;
 
   images_alert = [
     "./img_pollo_locco/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -47,8 +49,9 @@ class Endboss extends MovableObject {
 
   hadFirstContact = true;
   isCurrentlyHurt = false;
-  hurt_sound = new Audio('audio/boss-hit.mp3');
+  hurt_sound = new Audio("audio/boss-hit.mp3");
   dead_sound = new Audio("audio/boss-dead.mp3");
+  // attack_sound = new Audio("audio/boss-laugh.mp3")
 
   constructor() {
     super().loadImage(this.images_alert[0]);
@@ -59,19 +62,136 @@ class Endboss extends MovableObject {
     this.loadImages(this.images_dead);
     this.x = 2500;
     this.animate();
+    this.randomizeAttack();
+    this.performAttack();
+  }
+
+  performAttack() {
+    if (this.isDead() || !this.attackCooldown) {
+      this.attackCooldown = true;
+
+      const originalX = this.x;
+      const originalY = this.y;
+      const forwardDistance = Math.random() * 600;
+      const forwardDuration = 200;
+
+      this.executeAttack(
+        originalX,
+        originalY,
+        forwardDistance,
+        forwardDuration
+      );
+    }
+  }
+
+  executeAttack(originalX, originalY, forwardDistance, forwardDuration) {
+    if (Math.random() < 0.5) {
+      this.flyAndAttack(originalX, originalY, forwardDistance, forwardDuration);
+    }
+
+    this.moveWithSpeed(this.x - forwardDistance, forwardDuration, () => {
+      this.moveWithSpeed(originalX, forwardDuration, () => {
+        setTimeout(() => {
+          this.attackCooldown = false;
+        }, 1000);
+      });
+    });
+  }
+
+  flyAndAttack(originalX, originalY, forwardDistance, forwardDuration) {
+    const forwardX = originalX - forwardDistance;
+    const flyHeight = originalY - 200;
+
+    this.moveWithSpeedAndHeight(forwardX, flyHeight, forwardDuration, () => {
+      this.moveWithSpeedAndHeight(originalX, originalY, forwardDuration, () => {
+        setTimeout(() => {
+          this.attackCooldown = false;
+        }, 1000);
+      });
+    });
+  }
+
+  moveWithSpeedAndHeight(targetX, targetY, duration, callback) {
+    const startTime = Date.now();
+    const startX = this.x;
+    const startY = this.y;
+
+    const distances = {
+      x: targetX - startX,
+      y: targetY - startY,
+    };
+
+    this.startMovement(
+      startTime,
+      duration,
+      distances,
+      targetX,
+      targetY,
+      callback
+    );
+  }
+
+  startMovement(startTime, duration, distances, targetX, targetY, callback) {
+    const moveInterval = setInterval(() => {
+      const elapsedTime = Date.now() - startTime;
+
+      if (elapsedTime >= duration) {
+        clearInterval(moveInterval);
+        this.x = targetX;
+        this.y = targetY;
+        if (callback) callback();
+      } else {
+        this.x += (distances.x / duration) * 20;
+        this.y += (distances.y / duration) * 20;
+      }
+    }, 20);
+  }
+
+  moveWithSpeed(targetX, duration, callback) {
+    const startTime = Date.now();
+    const startX = this.x;
+    const distance = targetX - startX;
+
+    const moveInterval = setInterval(() => {
+      const elapsedTime = Date.now() - startTime;
+      if (elapsedTime >= duration) {
+        this.x = targetX;
+        clearInterval(moveInterval);
+        if (callback) callback();
+      } else {
+        this.x = startX + (distance * elapsedTime) / duration;
+      }
+    }, 20);
+  }
+
+  randomizeAttack() {
+    if (Math.random() < 0.5) {
+      this.performAttack();
+    }
   }
 
   animate() {
     setInterval(() => {
-      this.moveRandom();
-      this.randomizeAnimation();
+      if (this.isDead()) {
+        !this.moveRandom();
+        this.playAnimation(this.images_dead);
+        this.dead_sound.play();
+        this.x += this.speed + 50;
 
-      if (this.currentAnimation === "walking") {
-        this.playAnimation(this.images_walking);
-      } else if (this.currentAnimation === "alert") {
-        this.playAnimation(this.images_alert);
-      } else if (this.currentAnimation === "attack") {
-        this.playAnimation(this.images_attack);
+        setTimeout(() => {
+          stopGame();
+        }, 3000);
+      } else {
+        this.moveRandom();
+        this.randomizeAnimation();
+
+        if (this.isMoving) {
+          this.playAnimation(this.images_walking);
+        } else if (this.currentAnimation === "alert") {
+          this.playAnimation(this.images_alert);
+        } else if (this.currentAnimation === "attack") {
+          this.playAnimation(this.images_attack);
+        }
       }
     }, 200);
 
@@ -82,17 +202,7 @@ class Endboss extends MovableObject {
       }
     }, 200);
 
-    setInterval(() => {
-      if (this.isDead()) {
-        this.playAnimation(this.images_dead);
-        this.dead_sound.play();
-        this.x += this.speed + 50;
-
-        setTimeout(() => {
-          stopGame();
-        }, 3000);
-      }
-    }, 200);
+    setInterval(() => {}, 200);
   }
 
   isHit() {
@@ -111,6 +221,8 @@ class Endboss extends MovableObject {
       this.currentAnimation = "alert";
     } else {
       this.currentAnimation = "attack";
+      // this.attack_sound.play();
+      this.randomizeAttack();
     }
   }
 }

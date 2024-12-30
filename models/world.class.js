@@ -9,8 +9,11 @@ class World {
   endbossBar = new Bossbar();
   coins = this.generateCoins(5);
   coinBar = new Coinbar();
+  coin_sound= new Audio('audio/coin-pickup.mp3');
   bottleBar = new Bottlebar();
-  bottles = this.generateBottles(2);
+  bottles = this.generateBottles(4);
+  bottle_sound = new Audio('audio/bottle-pickup.mp3')
+  noBottle_sound = new Audio('audio/no-bottle.mp3')
   throwableObjects = [];
 
   constructor(canvas) {
@@ -32,7 +35,8 @@ class World {
       this.checkCollisionsEndboss();
       this.checkBottleCollisions();
       this.checkBottleCollisionsEndboss();
-      // this.checkCharacterCollidingCoin();
+      this.checkCoinCollection();
+      this.checkBottleCollection();
       this.checkThrowObjects();
     }, 200);
   }
@@ -40,7 +44,7 @@ class World {
   generateCoins(count) {
     let coins = [];
     for (let i = 0; i < count; i++) {
-      let x = 400 + Math.random() * 5000;
+      let x = 400 + Math.random() * 2000;
       let y = Math.random() + 160;
       coins.push(new Coin(x, y));
     }
@@ -48,29 +52,47 @@ class World {
 
     return coins;
   }
-  
-    checkCoinCollection() {
-      this.coins = this.coins.filter((coin) => {
-        if (this.checkCharacterCollidingCoin(coin)) {
-          this.coinBar.setPercentage(this.coinBar.percentage + 20);
-          return false;
-        }
-        return true;
-      });
-    }
-  
-    checkCharacterCollidingCoin(coin) {
-      // console.log(coin);
-      // console.log(this.character);
-  
-      return (
-        this.character.x + this.character.width > coin.x &&
-        this.character.x < coin.x + coin.width &&
-        this.character.y + this.character.height > coin.y &&
-        this.character.y < coin.y + coin.height
-      );
-    }
-  
+
+  checkCoinCollection() {
+    this.coins = this.coins.filter((coin) => {
+      if (this.checkCharacterCollidingCoin(coin)) {
+        this.coinBar.setPercentage(this.coinBar.percentage + 20);
+        this.coin_sound.play();
+        return false;
+      }
+      return true;
+    });
+  }
+
+  checkCharacterCollidingCoin(coin) {
+    return (
+      this.character.x + this.character.width > coin.x &&
+      this.character.x < coin.x + coin.width &&
+      this.character.y + this.character.height > coin.y &&
+      this.character.y < coin.y + coin.height
+    );
+  }
+
+  checkBottleCollection() {
+    this.bottles = this.bottles.filter((bottle) => {
+      if (this.checkCharacterCollidingBottle(bottle)) {
+        this.bottleBar.setPercentage(this.bottleBar.percentage = 100);
+        this.bottle_sound.play();
+        return false;
+      }
+      return true;
+    });
+  }
+
+  checkCharacterCollidingBottle(bottle) {
+    return (
+      this.character.x + this.character.width > bottle.x &&
+      this.character.x < bottle.x + bottle.width &&
+      this.character.y + this.character.height > bottle.y &&
+      this.character.y < bottle.y + bottle.height
+    );
+  }
+
   generateBottles(count) {
     let bottles = [];
     for (let i = 0; i < count; i++) {
@@ -92,6 +114,7 @@ class World {
       this.throwableObjects.push(bottle);
       this.bottleBar.setPercentage(this.bottleBar.percentage - 20);
     } else if (this.keyboard.d && this.bottleBar.percentage === 0) {
+      this.noBottle_sound.play();
       return false;
     }
   }
