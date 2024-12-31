@@ -54,7 +54,6 @@ class Character extends MovableObject {
     this.loadImages(this.images_hurt);
     this.loadImages(this.images_dead);
     this.applyGravity();
-    this.isJumpingOn()
     this.animate();
   }
 
@@ -96,5 +95,4 @@ class Character extends MovableObject {
       }
     }, 50);
   }
-
 }

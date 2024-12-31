@@ -14,7 +14,7 @@ class Bottlebar extends DrawableObject {
     super();
     this.loadImages(this.images);
     this.x = 60;
-    this.y = 60;
+    this.y = 80;
     this.width = 200;
     this.height = 60;
     this.setPercentage(100);

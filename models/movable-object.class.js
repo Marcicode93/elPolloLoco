@@ -33,17 +33,8 @@ class MovableObject extends DrawableObject {
     );
   }
 
-  isJumpingOn(mo) {
-    return (
-      this.speedY < 0 &&
-      this.y + this.height <= mo.y + 20 &&
-      this.x + this.width > mo.x &&
-      this.x < mo.x + mo.width
-    );
-  }
-
   hit() {
-    this.energy -= 5;
+    this.energy -= 2;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -87,8 +78,8 @@ class MovableObject extends DrawableObject {
   }
 
   moveRandom() {
-    const minX = 2000;
-    const maxX = 2500;
+    const minX = 4000;
+    const maxX = 4800;
     const direction = Math.random() < 0.5 ? -1 : 1;
 
     const nextX = this.x + direction * (this.speed + Math.random() * 50);
@@ -106,3 +97,13 @@ class MovableObject extends DrawableObject {
     this.jump_sound.play();
   }
 }
+
+
+  // isJumpingOn(mo) {
+  //   return (
+  //     this.speedY < 0 &&
+  //     this.y + this.height <= mo.y + 20 &&
+  //     this.x + this.width > mo.x &&
+  //     this.x < mo.x + mo.width
+  //   );
+  // }

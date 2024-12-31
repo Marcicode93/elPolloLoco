@@ -15,19 +15,17 @@ class Chicken extends MovableObject {
 
   walking_sound = new Audio("audio/chicken.mp3");
 
-  constructor(character) {
+  constructor() {
     super().loadImage(
       "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
     );
-    this.character = character;
     this.loadImages(this.images_walking);
     this.loadImages(this.images_dead);
-    this.x = 300 + Math.random() * 500;
+    this.x = 400 + Math.random() * 3500;
     (this.speed = 0.15 + Math.random() * 0), 25;
     this.animate();
-    console.log('Character:', this.character);
+    console.log("Character:", this.character);
   }
-
 
   animate() {
     setInterval(() => {
@@ -35,22 +33,9 @@ class Chicken extends MovableObject {
       // this.walking_sound.play();
     }, 1000 / 60);
 
-    // setInterval(() => {
-    //   if (this.character.isJumpingOn(this)) {
-    //     this.hit();
-    //     console.log("Chicken getroffen!");
-
-    //     if (this.energy <= 0) {
-    //       console.log("Chicken ist tot!");
-    //       this.loadImage(this.images_dead[0]);
-    //     }
-
-    //     this.character.speedY = 15;
-    //   }
-    // }, 100);
-
     setInterval(() => {
       this.playAnimation(this.images_walking);
     }, 100);
   }
 }
+

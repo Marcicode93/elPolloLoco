@@ -7,13 +7,13 @@ class World {
   camera_x = 0;
   statusBar = new Statusbar();
   endbossBar = new Bossbar();
-  coins = this.generateCoins(5);
+  coins = this.generateCoins(10);
   coinBar = new Coinbar();
-  coin_sound= new Audio('audio/coin-pickup.mp3');
+  coin_sound = new Audio("audio/coin-pickup.mp3");
   bottleBar = new Bottlebar();
   bottles = this.generateBottles(4);
-  bottle_sound = new Audio('audio/bottle-pickup.mp3')
-  noBottle_sound = new Audio('audio/no-bottle.mp3')
+  bottle_sound = new Audio("audio/bottle-pickup.mp3");
+  noBottle_sound = new Audio("audio/no-bottle.mp3");
   throwableObjects = [];
 
   constructor(canvas) {
@@ -44,7 +44,7 @@ class World {
   generateCoins(count) {
     let coins = [];
     for (let i = 0; i < count; i++) {
-      let x = 400 + Math.random() * 2000;
+      let x = 600 + Math.random() * 3000;
       let y = Math.random() + 160;
       coins.push(new Coin(x, y));
     }
@@ -56,7 +56,7 @@ class World {
   checkCoinCollection() {
     this.coins = this.coins.filter((coin) => {
       if (this.checkCharacterCollidingCoin(coin)) {
-        this.coinBar.setPercentage(this.coinBar.percentage + 20);
+        this.coinBar.setPercentage(this.coinBar.percentage + 10);
         this.coin_sound.play();
         return false;
       }
@@ -76,7 +76,7 @@ class World {
   checkBottleCollection() {
     this.bottles = this.bottles.filter((bottle) => {
       if (this.checkCharacterCollidingBottle(bottle)) {
-        this.bottleBar.setPercentage(this.bottleBar.percentage = 100);
+        this.bottleBar.setPercentage((this.bottleBar.percentage = 100));
         this.bottle_sound.play();
         return false;
       }
@@ -95,12 +95,15 @@ class World {
 
   generateBottles(count) {
     let bottles = [];
+    let startX = 3400;
+    let endX = 4600;
+    let interval = (endX - startX) / count;
+
     for (let i = 0; i < count; i++) {
-      let x = 400 + Math.random() * 2000;
+      let x = startX + i * interval + Math.random() * (interval * 0.5);
       let y = 360;
       bottles.push(new Bottle(x, y));
     }
-    console.log(bottles);
 
     return bottles;
   }

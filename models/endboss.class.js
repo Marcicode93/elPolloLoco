@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
   width = 200;
   y = 65;
   energy = 100;
-  attackSpeed = 30;
+  attackSpeed = 20;
   attackCooldown = false;
 
   images_alert = [
@@ -60,7 +60,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.images_attack);
     this.loadImages(this.images_hurt);
     this.loadImages(this.images_dead);
-    this.x = 2500;
+    this.x = 4800;
     this.animate();
     this.randomizeAttack();
     this.performAttack();
@@ -72,8 +72,8 @@ class Endboss extends MovableObject {
 
       const originalX = this.x;
       const originalY = this.y;
-      const forwardDistance = Math.random() * 600;
-      const forwardDuration = 200;
+      const forwardDistance = Math.random() * 400;
+      const forwardDuration = 250;
 
       this.executeAttack(
         originalX,
@@ -100,7 +100,7 @@ class Endboss extends MovableObject {
 
   flyAndAttack(originalX, originalY, forwardDistance, forwardDuration) {
     const forwardX = originalX - forwardDistance;
-    const flyHeight = originalY - 200;
+    const flyHeight = originalY - 150;
 
     this.moveWithSpeedAndHeight(forwardX, flyHeight, forwardDuration, () => {
       this.moveWithSpeedAndHeight(originalX, originalY, forwardDuration, () => {
