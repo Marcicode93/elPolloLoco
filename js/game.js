@@ -8,8 +8,8 @@ function init() {
 function startGame() {
   gameStart = document.getElementById("start-screen");
   let gameOver = document.getElementById("game-over-screen");
-  let win = document.getElementById("win-screen")
-  win.classList.add("display-none")
+  let win = document.getElementById("win-screen");
+  win.classList.add("display-none");
   gameOver.classList.add("display-none");
   gameStart.classList.add("display-none");
   initLevel();
@@ -61,6 +61,10 @@ window.addEventListener("keydown", (e) => {
   }
   if (e.keyCode == 68) {
     keyboard.d = true;
+    console.log("key pressed successfully!");
+  }
+  if (e.keyCode == 66) {
+    keyboard.b = true;
   }
 });
 window.addEventListener("keyup", (e) => {
@@ -80,6 +84,12 @@ window.addEventListener("keyup", (e) => {
     keyboard.space = false;
   }
   if (e.keyCode == 68) {
-    keyboard.d = false;
+    setTimeout(() => {
+      
+      keyboard.d = false;
+    }, 100);
+  }
+  if (e.keyCode == 66) {
+    keyboard.b = false;
   }
 });

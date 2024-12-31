@@ -7,15 +7,20 @@ class ThrowableObject extends MovableObject {
     this.y = y;
     this.height = 80;
     this.width = 60;
-    super.loadImage(
-      "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
-    );
+    super.loadImages(this.images_throwing)
     this.throw();
   }
 
+images_throwing=[
+  "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+  "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+  "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+  "./img_pollo_locco/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+]  
   throw() {
     this.speedY = 20;
     this.throw_sound.play();
+    this.playAnimation(this.images_throwing);
     this.applyGravity();
     setInterval(() => {
       this.x += 20;

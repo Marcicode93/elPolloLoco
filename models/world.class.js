@@ -75,7 +75,7 @@ class World {
 
   checkBottleCollection() {
     this.bottles = this.bottles.filter((bottle) => {
-      if (this.checkCharacterCollidingBottle(bottle)) {
+      if (this.keyboard.b && this.checkCharacterCollidingBottle(bottle)) {
         this.bottleBar.setPercentage((this.bottleBar.percentage = 100));
         this.bottle_sound.play();
         return false;
