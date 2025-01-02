@@ -2,9 +2,22 @@ let level1;
 
 function initLevel() {
   level1 = new Level(
-  enemies= [new Chicken(), new Chicken(), new Chicken(), new Chicken(),new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Chicken()],
-  endboss=  new Endboss(),
-    [new Cloud()],
+    (enemies = [
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+    ]),
+
+    (endboss = new Endboss()),
+    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
+
     [
       new BackgroundObject(
         "./img_pollo_locco/img/5_background/layers/air.png",
@@ -189,5 +202,4 @@ function initLevel() {
       ),
     ]
   );
-
 }

@@ -13,19 +13,17 @@ class Bossbar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.images);
-    this.x=400;
-    this.y=10;
+    this.x = 400;
+    this.y = 10;
     this.width = 200;
     this.height = 60;
     this.setPercentage(100);
   }
 
-
   setPercentage(percentage) {
     this.percentage = percentage;
-    let path = this.images[this.resolveImageIndex()]
+    let path = this.images[this.resolveImageIndex()];
     this.img = this.ImageCache[path];
-    
   }
 
   resolveImageIndex() {

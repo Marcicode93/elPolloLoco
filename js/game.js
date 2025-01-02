@@ -59,10 +59,12 @@ window.addEventListener("keydown", (e) => {
   if (e.keyCode == 32) {
     keyboard.space = true;
   }
+
   if (e.keyCode == 68) {
     keyboard.d = true;
     console.log("key pressed successfully!");
   }
+
   if (e.keyCode == 66) {
     keyboard.b = true;
   }
@@ -83,12 +85,11 @@ window.addEventListener("keyup", (e) => {
   if (e.keyCode == 32) {
     keyboard.space = false;
   }
+
   if (e.keyCode == 68) {
-    setTimeout(() => {
-      
-      keyboard.d = false;
-    }, 100);
+    keyboard.d = false;
   }
+
   if (e.keyCode == 66) {
     keyboard.b = false;
   }

@@ -34,11 +34,18 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 2;
-    if (this.energy < 0) {
-      this.energy = 0;
+    if (
+      this.world.character.isAboveGround() &&
+      this.world.character.speedY < 0
+    ) {
+      this.energy;
     } else {
-      this.lastHit = new Date().getTime();
+      this.energy -= 2;
+      if (this.energy < 0) {
+        this.energy = 0;
+      } else {
+        this.lastHit = new Date().getTime();
+      }
     }
   }
 
@@ -98,12 +105,11 @@ class MovableObject extends DrawableObject {
   }
 }
 
-
-  // isJumpingOn(mo) {
-  //   return (
-  //     this.speedY < 0 &&
-  //     this.y + this.height <= mo.y + 20 &&
-  //     this.x + this.width > mo.x &&
-  //     this.x < mo.x + mo.width
-  //   );
-  // }
+// isJumpingOn(mo) {
+//   return (
+//     this.speedY < 0 &&
+//     this.y + this.height <= mo.y + 20 &&
+//     this.x + this.width > mo.x &&
+//     this.x < mo.x + mo.width
+//   );
+// }

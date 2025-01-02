@@ -38,7 +38,32 @@ class World {
       this.checkCoinCollection();
       this.checkBottleCollection();
       this.checkThrowObjects();
-    }, 200);
+      this.isJumpingOn();
+    }, 100);
+  }
+
+  isJumpingOn() {
+    setInterval(() => {
+      this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+          if (this.character.isAboveGround() && this.character.speedY < 0) {
+            enemy.isDead();
+            this.removeEnemy(enemy);
+          } else {
+            if (this.character.isHurt()) {
+              this.character.hit();
+            }
+          }
+        }
+      });
+    }, 50);
+  }
+
+  removeEnemy(enemy) {
+    const index = this.level.enemies.indexOf(enemy);
+    if (index > -1) {
+      this.level.enemies.splice(index, 1);
+    }
   }
 
   generateCoins(count) {
