@@ -14,6 +14,7 @@ class Smallchicken extends MovableObject {
     ];
   
     walking_sound = new Audio("audio/chicken.mp3");
+    dead_sound = new Audio("audio/small chicken dead sound.mp3");
   
     constructor() {
       super().loadImage(
@@ -22,7 +23,7 @@ class Smallchicken extends MovableObject {
       this.loadImages(this.images_walking);
       this.loadImages(this.images_dead);
       this.x = 400 + Math.random() * 3500;
-      (this.speed = 0.15 + Math.random() * 0), 25;
+      (this.speed = 2 + Math.random() * 0), 25;
       this.animate();
     }
   
@@ -39,7 +40,7 @@ class Smallchicken extends MovableObject {
       let deathAnimation = setInterval(() => {
         if (this.isDead()) {
           this.playAnimation(this.images_dead);
-          console.log("Chicken deeeeeeead");
+          this.dead_sound.play();
           clearInterval(deathAnimation)
         }
       }, 100);

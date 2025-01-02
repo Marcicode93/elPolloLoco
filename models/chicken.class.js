@@ -14,6 +14,7 @@ class Chicken extends MovableObject {
   ];
 
   walking_sound = new Audio("audio/chicken.mp3");
+  dead_sound = new Audio("audio/chicken dead sound.mp3");
 
   constructor() {
     super().loadImage(
@@ -39,8 +40,8 @@ class Chicken extends MovableObject {
     let deathAnimation = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
-        console.log("Chicken deeeeeeead");
-        clearInterval(deathAnimation)
+        this.dead_sound.play()
+        clearInterval(deathAnimation);
       }
     }, 100);
   }

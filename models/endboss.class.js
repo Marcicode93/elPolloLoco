@@ -171,38 +171,51 @@ class Endboss extends MovableObject {
   }
 
   animate() {
+    this.setupDeathCheck();
+    this.setupHurtAnimation();
+  }
+
+  setupDeathCheck() {
     setInterval(() => {
       if (this.isDead()) {
-        !this.moveRandom();
-        this.playAnimation(this.images_dead);
-        this.dead_sound.play();
-        this.x += this.speed + 50;
-
-        setTimeout(() => {
-          stopGame();
-        }, 3000);
+        this.handleDeath();
       } else {
-        this.moveRandom();
-        this.randomizeAnimation();
-
-        if (this.isMoving) {
-          this.playAnimation(this.images_walking);
-        } else if (this.currentAnimation === "alert") {
-          this.playAnimation(this.images_alert);
-        } else if (this.currentAnimation === "attack") {
-          this.playAnimation(this.images_attack);
-        }
+        this.handleMovementAndAnimation();
       }
     }, 200);
+  }
 
+  handleDeath() {
+    this.stopMovement();
+    this.playAnimation(this.images_dead);
+    this.dead_sound.play();
+    this.x += this.speed + 50;
+
+    setTimeout(() => {
+      stopGame();
+    }, 3000);
+  }
+
+  handleMovementAndAnimation() {
+    this.moveRandom();
+    this.randomizeAnimation();
+
+    if (this.isMoving) {
+      this.playAnimation(this.images_walking);
+    } else if (this.currentAnimation === "alert") {
+      this.playAnimation(this.images_alert);
+    } else if (this.currentAnimation === "attack") {
+      this.playAnimation(this.images_attack);
+    }
+  }
+
+  setupHurtAnimation() {
     setInterval(() => {
       if (this.isCurrentlyHurt) {
         this.playAnimation(this.images_hurt);
         this.hurt_sound.play();
       }
     }, 200);
-
-    setInterval(() => {}, 200);
   }
 
   isHit() {
@@ -221,8 +234,11 @@ class Endboss extends MovableObject {
       this.currentAnimation = "alert";
     } else {
       this.currentAnimation = "attack";
-      // this.attack_sound.play();
       this.randomizeAttack();
     }
+  }
+
+  stopMovement() {
+    this.moveRandom = () => {};
   }
 }

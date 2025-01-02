@@ -38,6 +38,13 @@ function winScreen() {
   win_sound.play();
 }
 
+function muteAllSounds() {
+  // Alle Audio- und Video-Elemente im Dokument auswählen und muten
+  document.querySelectorAll("audio, video").forEach((mediaElement) => {
+    mediaElement.muted = true; // Stummschalten
+  });
+}
+
 // toDo
 // game_sound = new Audio("audio/background-music.mp3");
 game_over_sound = new Audio("audio/game-over-jingle.mp3");
@@ -59,16 +66,14 @@ window.addEventListener("keydown", (e) => {
   if (e.keyCode == 32) {
     keyboard.space = true;
   }
-
   if (e.keyCode == 68) {
     keyboard.d = true;
-    console.log("key pressed successfully!");
   }
-
   if (e.keyCode == 66) {
     keyboard.b = true;
   }
 });
+
 window.addEventListener("keyup", (e) => {
   if (e.keyCode == 39) {
     keyboard.right = false;
@@ -85,11 +90,9 @@ window.addEventListener("keyup", (e) => {
   if (e.keyCode == 32) {
     keyboard.space = false;
   }
-
   if (e.keyCode == 68) {
     keyboard.d = false;
   }
-
   if (e.keyCode == 66) {
     keyboard.b = false;
   }

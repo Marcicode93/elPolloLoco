@@ -104,12 +104,3 @@ class MovableObject extends DrawableObject {
     this.jump_sound.play();
   }
 }
-
-// isJumpingOn(mo) {
-//   return (
-//     this.speedY < 0 &&
-//     this.y + this.height <= mo.y + 20 &&
-//     this.x + this.width > mo.x &&
-//     this.x < mo.x + mo.width
-//   );
-// }
