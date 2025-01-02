@@ -9,10 +9,14 @@ function initLevel() {
       new Chicken(),
       new Chicken(),
       new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
+      new Chicken()
+    ]),
+
+    (enemies_small = [
+      new Smallchicken(),
+      new Smallchicken(),
+      new Smallchicken(),
+      new Smallchicken()
     ]),
 
     (endboss = new Endboss()),

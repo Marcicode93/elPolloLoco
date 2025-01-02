@@ -47,7 +47,10 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           if (this.character.isAboveGround() && this.character.speedY < 0) {
+            enemy.energy=enemy.energy-1;
             enemy.isDead();
+            console.log(enemy.energy);
+            
             this.removeEnemy(enemy);
           } else {
             if (this.character.isHurt()) {
@@ -73,7 +76,6 @@ class World {
       let y = Math.random() + 160;
       coins.push(new Coin(x, y));
     }
-    console.log(coins);
 
     return coins;
   }
@@ -228,6 +230,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.enemies_small);
     this.addToMap(this.level.endboss);
     this.addObjectsToMap(this.throwableObjects);
 
