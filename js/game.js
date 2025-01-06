@@ -38,6 +38,10 @@ function winScreen() {
   win_sound.play();
 }
 
+function reloadPage(){
+  location.reload();
+}
+
 // toDo
 // game_sound = new Audio("audio/background-music.mp3");
 game_over_sound = new Audio("audio/game-over-jingle.mp3");

@@ -4,11 +4,15 @@ body {
   font-family: "Bangers";
   align-items: center;
   overflow: hidden;
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   margin: 0;
   background-image: url("img_pollo_locco/img/5_background/desert-5112222_1920.png");
   background-size: cover;
+}
+
+.sound-toggle {
+  padding-bottom: 12px;
 }
 
 .sound-toggle img {
@@ -46,22 +50,24 @@ footer {
 }
 
 #start-screen {
-  position: absolute; /* Überlagert direkt den Canvas */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Gleiche Breite wie Canvas */
-  height: 100%; /* Gleiche Höhe wie Canvas */
-  z-index: 10; /* Über dem Canvas */
-  background-color: rgba(0, 0, 0, 0.8); /* Hintergrund abdunkeln */
-
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .start-game-img {
-  width: 720px;
+  width: 730px;
   height: 480px;
   position: fixed;
-
-  padding-bottom: 165px;
+  transform: translate(-50%, -50%);
+  top: 49%;
+  left: 49%;
+  bottom: 50%;
+  right: 50%;
 }
 
 .game-over-img {
@@ -102,7 +108,8 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-top: 10px;
+  margin-top: 60px;
+  margin-bottom: 60px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   padding-left: 12px;
@@ -125,7 +132,7 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 120px;
+  margin-top: 190px;
   background-color: rgb(255 220 0);
   width: 200px;
   z-index: 1000;
@@ -135,13 +142,13 @@ footer {
   font-family: "Bangers";
   color: white;
   cursor: pointer;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Standard-Schatten */
-  transition: all 0.3s ease; /* Smooth-Effekt */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+  transition: all 0.3s ease; 
 }
 
 .btn:hover {
   background-color: rgb(255, 160, 43);
-  transform: translate(-50%, -50%) scale(1.1); /* Button vergrößern */
+  transform: translate(-50%, -50%) scale(1.1); 
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 

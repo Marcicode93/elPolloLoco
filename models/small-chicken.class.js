@@ -30,7 +30,6 @@ class Smallchicken extends MovableObject {
     animate() {
       setInterval(() => {
         this.moveLeft();
-        // this.walking_sound.play();
       }, 1000 / 60);
   
       setInterval(() => {

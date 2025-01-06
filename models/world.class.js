@@ -17,7 +17,7 @@ class World {
   throwableObjects = [];
   bossBarDrawn = false;
   endbossDrawn = false;
-  endbossMusic = new Audio("audio/final-boss-music.mp3")
+  endbossMusic = new Audio("audio/final-boss-music.mp3");
 
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");

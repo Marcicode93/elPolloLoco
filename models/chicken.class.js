@@ -30,7 +30,6 @@ class Chicken extends MovableObject {
   animate() {
     setInterval(() => {
       this.moveLeft();
-      // this.walking_sound.play();
     }, 1000 / 60);
 
     setInterval(() => {
@@ -40,7 +39,7 @@ class Chicken extends MovableObject {
     let deathAnimation = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
-        this.dead_sound.play()
+        this.dead_sound.play();
         clearInterval(deathAnimation);
       }
     }, 100);
