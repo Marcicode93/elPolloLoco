@@ -38,17 +38,12 @@ function winScreen() {
   win_sound.play();
 }
 
-function muteAllSounds() {
-  // Alle Audio- und Video-Elemente im Dokument auswählen und muten
-  document.querySelectorAll("audio, video").forEach((mediaElement) => {
-    mediaElement.muted = true; // Stummschalten
-  });
-}
-
 // toDo
 // game_sound = new Audio("audio/background-music.mp3");
 game_over_sound = new Audio("audio/game-over-jingle.mp3");
 win_sound = new Audio("audio/win.mp3");
+
+
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {

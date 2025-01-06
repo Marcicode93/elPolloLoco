@@ -17,6 +17,7 @@ class World {
   throwableObjects = [];
   bossBarDrawn = false;
   endbossDrawn = false;
+  endbossMusic = new Audio("audio/final-boss-music.mp3")
 
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
@@ -290,6 +291,8 @@ class World {
 
     if (this.character.x > 3500 || this.endbossDrawn) {
       this.endbossDrawn = true;
+      this.endbossMusic.play();
+      this.endbossMusic.loop = true;
       this.addToMap(this.level.endboss);
     }
     this.addObjectsToMap(this.throwableObjects);

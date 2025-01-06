@@ -69,7 +69,6 @@ class Endboss extends MovableObject {
   performAttack() {
     if (this.isDead() || !this.attackCooldown) {
       this.attackCooldown = true;
-
       const originalX = this.x;
       const originalY = this.y;
       const forwardDistance = Math.random() * 400;
@@ -115,7 +114,6 @@ class Endboss extends MovableObject {
     const startTime = Date.now();
     const startX = this.x;
     const startY = this.y;
-
     const distances = {
       x: targetX - startX,
       y: targetY - startY,
@@ -188,6 +186,7 @@ class Endboss extends MovableObject {
   handleDeath() {
     this.stopMovement();
     this.playAnimation(this.images_dead);
+    // this.endbossMusic.pause();
     this.dead_sound.play();
     this.x += this.speed + 50;
 

@@ -1,9 +1,9 @@
-class Keyboard{
-    left=false;
-    right=false;
-    up=false;
-    down=false;
-    space=false;
-    d=false;
-
+class Keyboard {
+  left = false;
+  right = false;
+  up = false;
+  down = false;
+  space = false;
+  d = false;
+  idle = false;
 }
