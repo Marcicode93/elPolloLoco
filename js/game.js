@@ -1,5 +1,10 @@
 let canvas;
 let keyboard = new Keyboard();
+game_sound = new Audio("audio/background-music.mp3");
+game_over_sound = new Audio("audio/game-over-jingle.mp3");
+win_sound = new Audio("audio/win.mp3");
+endbossMusic = new Audio("audio/final-boss-music.mp3");
+music = null;
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -14,16 +19,36 @@ function startGame() {
   gameStart.classList.add("display-none");
   initLevel();
   world = new World(canvas);
+  switchMusic();
+  world.endbossReached = false;
+}
+
+function muteMusic() {
+  endbossMusic.pause();
+  game_sound.pause();
+}
+
+function switchMusic() {
+  muteMusic();
+  if ((world.endbossReached == true)) {
+    endbossMusic.play();
+    endbossMusic.loop = true;
+  } else {
+    game_sound.play();
+    game_sound.loop = true;
+  }
 }
 
 function stopGameOver() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
   gameOverScreen();
+  muteMusic();
 }
 
 function stopGame() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
   winScreen();
+  muteMusic();
 }
 
 function gameOverScreen() {
@@ -38,16 +63,9 @@ function winScreen() {
   win_sound.play();
 }
 
-function reloadPage(){
+function reloadPage() {
   location.reload();
 }
-
-// toDo
-// game_sound = new Audio("audio/background-music.mp3");
-game_over_sound = new Audio("audio/game-over-jingle.mp3");
-win_sound = new Audio("audio/win.mp3");
-
-
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {

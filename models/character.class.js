@@ -6,6 +6,7 @@ class Character extends MovableObject {
   energy = 100;
   isNotMoving = false;
   idleAnimationCount = 0;
+  invincible = false;
 
   images_walking = [
     "./img_pollo_locco/img/2_character_pepe/2_walk/W-21.png",
@@ -130,32 +131,29 @@ class Character extends MovableObject {
   }
 
   idling() {
+   
     if (!this.isNotMoving) {
-      this.isNotMoving = true;
-      this.playAnimation(this.images_idle);
-      this.idleAnimationCount++;
+        
+        this.isNotMoving = true;
+        this.playAnimation(this.images_idle);
+        this.idleAnimationCount++;
+        
+        setTimeout(() => {
+          this.isNotMoving = false;
+        }, 160);
+        
+      }
 
-      // if (this.idleAnimationCount === 1) {
-      //   this.idlingLong();
-      // }
+      // setTimeout(() => {
+      //   if (this.isNotMoving && this.idleAnimationCount === 2) this.playAnimation(this.images_idle_long);
+      //   console.log('long idle activateeeeeeed');
 
-      setTimeout(() => {
-        this.isNotMoving = false;
-      }, 160);
-    }
+      // }, 2000);
+
+      // setTimeout(() => {
+      //   this.isNotMoving = false;
+      // }, 160);
   }
-
-  // idlingLong() {
-  //   if (!this.isNotMoving) {
-  //     this.isNotMoving = true;
-  //     this.playAnimation(this.images_idle_long);
-  //     console.log("idlooooooong");
-  //   }
-
-  //   setTimeout(() => {
-  //     this.isNotMoving = false;
-  //   }, 2000);
-  // }
 
   setupStatusAnimation() {
     setInterval(() => {
@@ -183,5 +181,14 @@ class Character extends MovableObject {
     } else if (this.world.keyboard.right || this.world.keyboard.left) {
       this.playAnimation(this.images_walking);
     }
+  }
+
+  muteAllSounds(){
+    this.dead_sound.pause();
+    this.hurt_sound.pause();
+    this.walking_sound.pause();
+    this.jump_sound.pause();
+    console.log('sounds muuuuuuuteeeed');
+    
   }
 }

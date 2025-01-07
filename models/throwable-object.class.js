@@ -19,8 +19,8 @@ images_throwing=[
 ]  
   throw() {
     this.speedY = 20;
-    this.throw_sound.play();
     this.playAnimation(this.images_throwing);
+    this.throw_sound.play();
     this.applyGravity();
     setInterval(() => {
       this.x += 20;

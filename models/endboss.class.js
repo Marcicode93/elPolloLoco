@@ -186,7 +186,7 @@ class Endboss extends MovableObject {
   handleDeath() {
     this.stopMovement();
     this.playAnimation(this.images_dead);
-    // this.endbossMusic.pause();
+
     this.dead_sound.play();
     this.x += this.speed + 50;
 

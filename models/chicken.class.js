@@ -3,6 +3,7 @@ class Chicken extends MovableObject {
   height = 60;
   width = 60;
   energy = 1;
+
   images_walking = [
     "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -36,12 +37,12 @@ class Chicken extends MovableObject {
       this.playAnimation(this.images_walking);
     }, 100);
 
-    let deathAnimation = setInterval(() => {
+    this.deathAnimation = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
         this.dead_sound.play();
-        clearInterval(deathAnimation);
+        clearInterval(this.deathAnimation);
       }
-    }, 100);
+    }, 200);
   }
 }
