@@ -291,8 +291,7 @@ class World {
 
     if (this.character.x > 3500 || this.endbossDrawn) {
       this.endbossDrawn = true;
-      if (this.endbossReached==false) {
-        
+      if (this.endbossReached == false) {
         this.endbossReached = true;
         switchMusic();
       }

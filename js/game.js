@@ -13,7 +13,7 @@ function init() {
 function startGame() {
   gameStart = document.getElementById("start-screen");
   canvas = document.getElementById("canvas");
-  canvas.classList.remove('display-none');
+  canvas.classList.remove("display-none");
   let gameOver = document.getElementById("game-over-screen");
   let win = document.getElementById("win-screen");
   win.classList.add("display-none");
@@ -32,13 +32,32 @@ function muteMusic() {
 
 function switchMusic() {
   muteMusic();
-  if ((world.endbossReached == true)) {
+  if (world.endbossReached == true) {
+    endbossMusic.currentTime = 0;
     endbossMusic.play();
     endbossMusic.loop = true;
   } else {
+    game_sound.currentTime = 0;
     game_sound.play();
     game_sound.loop = true;
   }
+}
+
+function muteAllSounds() {
+  let soundToggle1 = document.getElementById("soundtoggle1");
+  let soundToggle2 = document.getElementById("soundtoggle2");
+  soundToggle1.classList.add("display-none");
+  soundToggle1.classList.remove("display-flex");
+  soundToggle2.classList.toggle("display-none");
+
+  setInterval(() => {
+    game_over_sound.pause();
+    muteMusic();
+  }, 20);
+}
+
+function unMuteAllSounds() {
+  
 }
 
 function stopGameOver() {

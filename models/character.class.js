@@ -5,7 +5,8 @@ class Character extends MovableObject {
   speed = 10;
   energy = 100;
   isNotMoving = false;
-  idleAnimationCount = 0;
+  idleCount = 0;
+  sleepingCount = 360;
   invincible = false;
 
   images_walking = [
@@ -84,6 +85,7 @@ class Character extends MovableObject {
     this.loadImages(this.images_hurt);
     this.loadImages(this.images_dead);
     this.loadImages(this.images_idle);
+    this.loadImages(this.images_idle_long);
     this.applyGravity();
     this.animate();
   }
@@ -103,14 +105,18 @@ class Character extends MovableObject {
   handleMovement() {
     if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
       this.moveRight();
+      this.idleCount = 0;
     }
     if (this.world.keyboard.left && this.x > 0) {
       this.moveLeft();
+      this.idleCount = 0;
     }
     if (this.world.keyboard.space && !this.isAboveGround()) {
       this.jump();
+      this.idleCount = 0;
     } else {
       this.idling();
+      this.idleCount++;
     }
   }
 
@@ -133,8 +139,12 @@ class Character extends MovableObject {
   idling() {
     if (!this.isNotMoving) {
       this.isNotMoving = true;
-      this.playAnimation(this.images_idle);
-      this.idleAnimationCount++;
+
+      if (this.idleCount < this.sleepingCount) {
+        this.playAnimation(this.images_idle);
+      } else {
+        this.playAnimation(this.images_idle_long);
+      }
 
       setTimeout(() => {
         this.isNotMoving = false;

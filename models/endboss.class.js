@@ -51,7 +51,7 @@ class Endboss extends MovableObject {
   isCurrentlyHurt = false;
   hurt_sound = new Audio("audio/boss-hit.mp3");
   dead_sound = new Audio("audio/boss-dead.mp3");
-  // attack_sound = new Audio("audio/boss-laugh.mp3")
+  attack_sound = new Audio("audio/boss-laugh.mp3");
 
   constructor() {
     super().loadImage(this.images_alert[0]);

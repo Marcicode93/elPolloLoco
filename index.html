@@ -36,16 +36,20 @@
   <body onload="init()">
     <div class="main">
       <h1>EL POLLO LOCO</h1>
-      <div class="sound-toggle" id="sound-toggle" onclick="muteAllSounds()">
+      <div class="sound-toggle" id="sound-toggle">
         <img
           src="img_pollo_locco/img/11_mute/icons8-sound-100.png"
           class="display-flex"
+          id="soundtoggle1"
           alt="sound-icon"
+          onclick="muteAllSounds()"
         />
         <img
-          src="img_pollo_locco/img/11_mute/icons8-sound-100.png"
+          src="img_pollo_locco/img/11_mute/icons8-no-sound-100.png"
           class="display-none"
+          id="soundtoggle2"
           alt="sound-icon"
+          onclick="unMuteAllSounds()"
         />
       </div>
 
@@ -94,31 +98,31 @@
       <div class="controls-mobile display-none">
         <span
           ><img
-            src="img_pollo_locco/img/10_keys/icons8-links-60.png"
+            src="img_pollo_locco/img/12_mobile_keys/icons8-sortieren-links-64.png"
             alt="move-left"
           />Move left</span
         >
         <span
           ><img
-            src="img_pollo_locco/img/10_keys/icons8-pfeil-rechts-60.png"
+            src="img_pollo_locco/img/12_mobile_keys/icons8-sortieren-rechts-64.png"
             alt="move-right"
           />Move right</span
         >
         <span
           ><img
-            src="img_pollo_locco/img/10_keys/icons8-leertaste-100.png"
+            src="img_pollo_locco/img/12_mobile_keys/icons8-trampolinanlage-50.png"
             alt="jump with spacebar"
           />Jump</span
         >
         <span
           ><img
-            src="img_pollo_locco/img/10_keys/icons8-d-taste-100.png"
+            src="img_pollo_locco/img/12_mobile_keys/icons8-weinflasche-50.png"
             alt="throw with d"
           />Throw Bottle</span
         >
         <span
           ><img
-            src="img_pollo_locco/img/10_keys/icons8-b-taste-100.png"
+            src="img_pollo_locco/img/12_mobile_keys/icons8-pick-up-64.png"
             alt="pick up with b"
           />Pick up Bottle</span
         >
@@ -147,6 +151,8 @@
       <div class="links">
         <a target="_blank" href="https://icons8.com/icon/98961/left"></a> Icons
         by <a target="_blank" href="https://icons8.com">Icons8</a>
+        <a href="">Impressum</a>
+        <a href="">Datenschutz</a>
       </div>
     </footer>
   </body>
