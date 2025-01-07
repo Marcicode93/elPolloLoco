@@ -5,9 +5,9 @@ class Chicken extends MovableObject {
   energy = 1;
 
   images_walking = [
-    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
   images_dead = [
@@ -19,7 +19,7 @@ class Chicken extends MovableObject {
 
   constructor() {
     super().loadImage(
-      "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
+      "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
     );
     this.loadImages(this.images_walking);
     this.loadImages(this.images_dead);

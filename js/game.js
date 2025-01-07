@@ -12,6 +12,8 @@ function init() {
 
 function startGame() {
   gameStart = document.getElementById("start-screen");
+  canvas = document.getElementById("canvas");
+  canvas.classList.remove('display-none');
   let gameOver = document.getElementById("game-over-screen");
   let win = document.getElementById("win-screen");
   win.classList.add("display-none");

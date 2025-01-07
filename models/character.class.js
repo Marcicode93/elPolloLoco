@@ -9,66 +9,66 @@ class Character extends MovableObject {
   invincible = false;
 
   images_walking = [
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-21.png",
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-22.png",
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-23.png",
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-24.png",
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-25.png",
-    "./img_pollo_locco/img/2_character_pepe/2_walk/W-26.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-21.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-22.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-23.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-24.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-25.png",
+    "img_pollo_locco/img/2_character_pepe/2_walk/W-26.png",
   ];
 
   images_jumping = [
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-31.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-32.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-33.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-34.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-35.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-36.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-37.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-38.png",
-    "./img_pollo_locco/img/2_character_pepe/3_jump/J-39.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-31.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-32.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-33.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-34.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-35.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-36.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-37.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-38.png",
+    "img_pollo_locco/img/2_character_pepe/3_jump/J-39.png",
   ];
 
   images_dead = [
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-51.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-52.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-53.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-54.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-55.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-56.png",
-    "./img_pollo_locco/img/2_character_pepe/5_dead/D-57.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-51.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-52.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-53.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-54.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-55.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-56.png",
+    "img_pollo_locco/img/2_character_pepe/5_dead/D-57.png",
   ];
 
   images_hurt = [
-    "./img_pollo_locco/img/2_character_pepe/4_hurt/H-41.png",
-    "./img_pollo_locco/img/2_character_pepe/4_hurt/H-42.png",
-    "./img_pollo_locco/img/2_character_pepe/4_hurt/H-43.png",
+    "img_pollo_locco/img/2_character_pepe/4_hurt/H-41.png",
+    "img_pollo_locco/img/2_character_pepe/4_hurt/H-42.png",
+    "img_pollo_locco/img/2_character_pepe/4_hurt/H-43.png",
   ];
 
   images_idle = [
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-1.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-2.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-3.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-4.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-5.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-6.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-7.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-8.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-9.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/idle/I-10.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-1.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-2.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-3.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-4.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-5.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-6.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-7.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-8.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-9.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
   images_idle_long = [
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-11.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-12.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-13.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-14.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-15.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-16.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-17.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-18.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-19.png",
-    "./img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-20.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img_pollo_locco/img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
   world;
@@ -78,7 +78,7 @@ class Character extends MovableObject {
   dead_sound = new Audio("audio/dead.mp3");
 
   constructor() {
-    super().loadImage("./img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
+    super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.images_walking);
     this.loadImages(this.images_jumping);
     this.loadImages(this.images_hurt);
@@ -131,28 +131,15 @@ class Character extends MovableObject {
   }
 
   idling() {
-   
     if (!this.isNotMoving) {
-        
-        this.isNotMoving = true;
-        this.playAnimation(this.images_idle);
-        this.idleAnimationCount++;
-        
-        setTimeout(() => {
-          this.isNotMoving = false;
-        }, 160);
-        
-      }
+      this.isNotMoving = true;
+      this.playAnimation(this.images_idle);
+      this.idleAnimationCount++;
 
-      // setTimeout(() => {
-      //   if (this.isNotMoving && this.idleAnimationCount === 2) this.playAnimation(this.images_idle_long);
-      //   console.log('long idle activateeeeeeed');
-
-      // }, 2000);
-
-      // setTimeout(() => {
-      //   this.isNotMoving = false;
-      // }, 160);
+      setTimeout(() => {
+        this.isNotMoving = false;
+      }, 160);
+    }
   }
 
   setupStatusAnimation() {
@@ -183,12 +170,11 @@ class Character extends MovableObject {
     }
   }
 
-  muteAllSounds(){
+  muteAllSounds() {
     this.dead_sound.pause();
     this.hurt_sound.pause();
     this.walking_sound.pause();
     this.jump_sound.pause();
-    console.log('sounds muuuuuuuteeeed');
-    
+    console.log("sounds muuuuuuuteeeed");
   }
 }
