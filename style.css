@@ -25,9 +25,9 @@ body {
 }
 
 .canvas-screen img{
-  max-width: 100%;  /* Macht die Elemente skalierbar */
+  max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Verhindert das Verzerren von Bildern oder Canvas */
+  object-fit: contain;
 }
 
 canvas {
