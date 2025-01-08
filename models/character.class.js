@@ -73,10 +73,7 @@ class Character extends MovableObject {
   ];
 
   world;
-  walking_sound = new Audio("audio/walk.mp3");
-  jump_sound = new Audio("audio/jump.mp3");
-  hurt_sound = new Audio("audio/hurt.mp3");
-  dead_sound = new Audio("audio/dead.mp3");
+
 
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
@@ -127,13 +124,13 @@ class Character extends MovableObject {
   moveRight() {
     super.moveRight();
     this.otherDirection = false;
-    this.walking_sound.play();
+    this.world.walking_char_sound.play();
   }
 
   moveLeft() {
     super.moveLeft();
     this.otherDirection = true;
-    this.walking_sound.play();
+    this.world.walking_char_sound.play();
   }
 
   idling() {
@@ -162,12 +159,12 @@ class Character extends MovableObject {
   handleStatusEffects() {
     if (this.isHurt()) {
       this.playAnimation(this.images_hurt);
-      this.hurt_sound.play();
+      this.world.hurt_char_sound.play();
     }
 
     if (this.isDead()) {
       this.playAnimation(this.images_dead);
-      this.dead_sound.play();
+      this.world.dead_char_sound.play();
       stopGameOver();
     }
   }
@@ -178,13 +175,5 @@ class Character extends MovableObject {
     } else if (this.world.keyboard.right || this.world.keyboard.left) {
       this.playAnimation(this.images_walking);
     }
-  }
-
-  muteAllSounds() {
-    this.dead_sound.pause();
-    this.hurt_sound.pause();
-    this.walking_sound.pause();
-    this.jump_sound.pause();
-    console.log("sounds muuuuuuuteeeed");
   }
 }

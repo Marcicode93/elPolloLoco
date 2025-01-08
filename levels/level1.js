@@ -18,7 +18,7 @@ function initLevel() {
       new Smallchicken(),
     ]),
     (endboss = new Endboss()),
-    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
+    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
 
     [
       new BackgroundObject(

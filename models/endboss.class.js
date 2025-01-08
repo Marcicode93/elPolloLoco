@@ -49,9 +49,7 @@ class Endboss extends MovableObject {
 
   hadFirstContact = true;
   isCurrentlyHurt = false;
-  hurt_sound = new Audio("audio/boss-hit.mp3");
-  dead_sound = new Audio("audio/boss-dead.mp3");
-  attack_sound = new Audio("audio/boss-laugh.mp3");
+
 
   constructor() {
     super().loadImage(this.images_alert[0]);
@@ -187,7 +185,7 @@ class Endboss extends MovableObject {
     this.stopMovement();
     this.playAnimation(this.images_dead);
 
-    this.dead_sound.play();
+    world.dead_boss_sound.play();
     this.x += this.speed + 50;
 
     setTimeout(() => {
@@ -212,7 +210,7 @@ class Endboss extends MovableObject {
     setInterval(() => {
       if (this.isCurrentlyHurt) {
         this.playAnimation(this.images_hurt);
-        this.hurt_sound.play();
+        world.hurt_boss_sound.play();
       }
     }, 200);
   }

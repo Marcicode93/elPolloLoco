@@ -9,11 +9,27 @@ class World {
   endbossBar = new Bossbar();
   coins = this.generateCoins(10);
   coinBar = new Coinbar();
-  coin_sound = new Audio("audio/coin-pickup.mp3");
   bottleBar = new Bottlebar();
   bottles = this.generateBottles(4);
+  game_sound = new Audio("audio/background-music.mp3");
+  game_over_sound = new Audio("audio/game-over-jingle.mp3");
+  win_sound = new Audio("audio/win.mp3");
+  endbossMusic = new Audio("audio/final-boss-music.mp3");
+  throw_sound = new Audio("audio/bottle-pop.mp3");
   bottle_sound = new Audio("audio/bottle-pickup.mp3");
   noBottle_sound = new Audio("audio/no-bottle.mp3");
+  coin_sound = new Audio("audio/coin-pickup.mp3");
+  walking_char_sound = new Audio("audio/walk.mp3");
+  jump_char_sound = new Audio("audio/jump.mp3");
+  hurt_char_sound = new Audio("audio/hurt.mp3");
+  dead_char_sound = new Audio("audio/dead.mp3");
+  walking_chicken_sound = new Audio("audio/chicken.mp3");
+  dead_chicken_sound = new Audio("audio/chicken dead sound.mp3");
+  walking_small_sound = new Audio("audio/chicken.mp3");
+  dead_small_sound = new Audio("audio/small chicken dead sound.mp3");
+  hurt_boss_sound = new Audio("audio/boss-hit.mp3");
+  dead_boss_sound = new Audio("audio/boss-dead.mp3");
+  attack_boss_sound = new Audio("audio/boss-laugh.mp3");
   throwableObjects = [];
   bossBarDrawn = false;
   endbossDrawn = false;
@@ -167,7 +183,8 @@ class World {
     if (this.keyboard.d && this.bottleBar.percentage > 0) {
       let bottle = new ThrowableObject(
         this.character.x + 100,
-        this.character.y + 100
+        this.character.y + 100,
+        this.character
       );
       this.throwableObjects.push(bottle);
       this.bottleBar.setPercentage(this.bottleBar.percentage - 20);
@@ -262,6 +279,8 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
+    this.addObjectsToMap(this.level.clouds);
+
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
@@ -285,7 +304,6 @@ class World {
       this.ctx.translate(this.camera_x, 0);
     }
 
-    this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.enemies_small);
 

@@ -5,6 +5,7 @@ body {
   background-image: url("img_pollo_locco/img/5_background/desert-5112222_1920.png");
   background-size: cover;
   max-width: 1920px;
+  overflow-x: hidden;
 }
 
 .sound-toggle {
@@ -23,9 +24,10 @@ body {
   align-items: center;
 }
 
-.canvas-screen img {
-  width: 720px;
-  height: 480px;
+.canvas-screen img{
+  max-width: 100%;  /* Macht die Elemente skalierbar */
+  max-height: 100%;
+  object-fit: contain; /* Verhindert das Verzerren von Bildern oder Canvas */
 }
 
 canvas {
@@ -47,8 +49,8 @@ footer {
 }
 
 footer a {
-  display: flex;
-  gap: 10px;
+  display: inline-block;
+  margin: 0 10px;
   text-decoration: none;
   color: white;
 }
@@ -56,6 +58,11 @@ footer a {
 footer a:hover {
   text-decoration: underline;
   color: rgb(255, 160, 43);
+}
+
+#generator_results {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .display-none {
@@ -77,6 +84,26 @@ footer a:hover {
   width: 100%;
   height: 100vh;
   z-index: 10;
+}
+
+#orientation-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  z-index: 9999;
+}
+
+#orientation-message img {
+  width: 300px;
 }
 
 .game-win-img {
@@ -113,12 +140,28 @@ footer a:hover {
   height: 60px;
 }
 
+.controls-mobile img {
+  cursor: pointer;
+}
+
+.home-button {
+  text-decoration: none;
+}
+
+.home-button:hover {
+  color: rgb(255, 160, 43);
+}
+
+.go-home:hover {
+  color: rgb(255, 150, 22);
+}
+
 .btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 260px;
+  margin-top: 180px;
   background-color: rgb(255 220 0);
   width: 200px;
   z-index: 1000;
@@ -144,13 +187,75 @@ h1 {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 1000px) {
   canvas {
     width: 100%;
   }
+  .controls {
+    display: none;
+  }
+
+  .controls-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .controls-mobile span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
   #start-screen {
+    width: 760px
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  canvas {
+    height: 100vh;
+  }
+  #start-screen {
+    height: 100%;
+  }
+  h1{
+    font-size: 36px;
+  }
+
+  footer{
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  canvas {
     width: 100%;
+    height: auto;
+  }
+  .controls {
+    display: none;
+  }
+
+  .controls-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .controls-mobile span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #start-screen {
+    width: 760px
   }
 }
 
@@ -159,6 +264,6 @@ h1 {
     height: 100vh;
   }
   #start-screen {
-    height: 100vh;
+    height: 100%;
   }
 }

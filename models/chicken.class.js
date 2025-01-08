@@ -14,9 +14,6 @@ class Chicken extends MovableObject {
     "./img_pollo_locco/img/3_enemies_chicken/chicken_normal/2_dead/dead.png",
   ];
 
-  walking_sound = new Audio("audio/chicken.mp3");
-  dead_sound = new Audio("audio/chicken dead sound.mp3");
-
   constructor() {
     super().loadImage(
       "img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"
@@ -40,7 +37,7 @@ class Chicken extends MovableObject {
     this.deathAnimation = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
-        this.dead_sound.play();
+        world.dead_chicken_sound.play();
         clearInterval(this.deathAnimation);
       }
     }, 200);

@@ -1,9 +1,6 @@
 let canvas;
 let keyboard = new Keyboard();
-game_sound = new Audio("audio/background-music.mp3");
-game_over_sound = new Audio("audio/game-over-jingle.mp3");
-win_sound = new Audio("audio/win.mp3");
-endbossMusic = new Audio("audio/final-boss-music.mp3");
+let isMuted = false;
 music = null;
 
 function init() {
@@ -11,53 +8,109 @@ function init() {
 }
 
 function startGame() {
-  gameStart = document.getElementById("start-screen");
   canvas = document.getElementById("canvas");
   canvas.classList.remove("display-none");
-  let gameOver = document.getElementById("game-over-screen");
-  let win = document.getElementById("win-screen");
-  win.classList.add("display-none");
-  gameOver.classList.add("display-none");
-  gameStart.classList.add("display-none");
+  let soundToggle = document.getElementById("sound-toggle");
+  soundToggle.classList.remove("display-none");
+  handleGameOver();
+  handleGameStart();
+  handleGameWin();
+
   initLevel();
   world = new World(canvas);
-  switchMusic();
+  checkMusic();
   world.endbossReached = false;
 }
 
+function handleGameOver() {
+  let gameOver = document.getElementById("game-over-screen");
+  gameOver.classList.add("display-none");
+}
+
+function handleGameStart() {
+  gameStart = document.getElementById("start-screen");
+  gameStart.classList.add("display-none");
+}
+
+function handleGameWin() {
+  let win = document.getElementById("win-screen");
+  win.classList.add("display-none");
+}
+
+function checkMusic() {
+  if (isMuted) {
+    let audioElements = getAudioElements();
+    audioElements.forEach((audio) => {
+      if (audio) {
+        audio.muted = isMuted;
+      }
+    });
+  } else {
+    switchMusic();
+  }
+}
+
+function getAudioElements() {
+  if (!world) return [];
+  return [
+    world.game_over_sound,
+    world.game_sound,
+    world.win_sound,
+    world.endbossMusic,
+    world.throw_sound,
+    world.bottle_sound,
+    world.noBottle_sound,
+    world.coin_sound,
+    world.walking_char_sound,
+    world.jump_char_sound,
+    world.hurt_char_sound,
+    world.dead_char_sound,
+    world.walking_chicken_sound,
+    world.dead_chicken_sound,
+    world.walking_small_sound,
+    world.dead_small_sound,
+    world.hurt_boss_sound,
+    world.dead_boss_sound,
+    world.attack_boss_sound,
+  ];
+}
+
+function updateSoundToggles(isMuted) {
+  let soundToggle1 = document.getElementById("soundtoggle1");
+  let soundToggle2 = document.getElementById("soundtoggle2");
+  soundToggle1.classList.toggle("display-none", isMuted);
+  soundToggle2.classList.toggle("display-none", !isMuted);
+}
+
+function toggleSound() {
+  isMuted = !isMuted;
+
+  let audioElements = getAudioElements();
+  audioElements.forEach((audio) => {
+    if (audio) {
+      audio.muted = isMuted;
+    }
+  });
+
+  updateSoundToggles(isMuted);
+}
+
 function muteMusic() {
-  endbossMusic.pause();
-  game_sound.pause();
+  world.endbossMusic.pause();
+  world.game_sound.pause();
 }
 
 function switchMusic() {
   muteMusic();
   if (world.endbossReached == true) {
-    endbossMusic.currentTime = 0;
-    endbossMusic.play();
-    endbossMusic.loop = true;
+    world.endbossMusic.currentTime = 0;
+    world.endbossMusic.play();
+    world.endbossMusic.loop = true;
   } else {
-    game_sound.currentTime = 0;
-    game_sound.play();
-    game_sound.loop = true;
+    world.game_sound.currentTime = 0;
+    world.game_sound.play();
+    world.game_sound.loop = true;
   }
-}
-
-function muteAllSounds() {
-  let soundToggle1 = document.getElementById("soundtoggle1");
-  let soundToggle2 = document.getElementById("soundtoggle2");
-  soundToggle1.classList.add("display-none");
-  soundToggle1.classList.remove("display-flex");
-  soundToggle2.classList.toggle("display-none");
-
-  setInterval(() => {
-    game_over_sound.pause();
-    muteMusic();
-  }, 20);
-}
-
-function unMuteAllSounds() {
-  
 }
 
 function stopGameOver() {
@@ -75,18 +128,32 @@ function stopGame() {
 function gameOverScreen() {
   let gameOver = document.getElementById("game-over-screen");
   gameOver.classList.toggle("display-none");
-  game_over_sound.play();
+  world.game_over_sound.play();
 }
 
 function winScreen() {
   let win = document.getElementById("win-screen");
   win.classList.toggle("display-none");
-  win_sound.play();
+  world.win_sound.play();
 }
 
 function reloadPage() {
   location.reload();
 }
+
+function checkDevice() {
+  const isMobile =
+    window.innerWidth <= 768 && /Mobi|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    document.getElementById("orientation-message").style.display = "flex";
+  } else {
+    document.getElementById("orientation-message").style.display = "none";
+  }
+}
+
+window.onload = checkDevice;
+window.onresize = checkDevice;
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
