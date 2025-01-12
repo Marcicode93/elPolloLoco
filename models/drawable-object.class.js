@@ -12,9 +12,17 @@ class DrawableObject {
     this.img.src = path;
   }
 
+  /**
+   * draws image onto the canvas.
+   */
+
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
+
+  /**
+   * draws a frame around the elements in the world to allow for collision detection.
+   */
 
   drawFrame(ctx) {
     if (
@@ -33,6 +41,10 @@ class DrawableObject {
       }
     }
   }
+
+  /**
+   * loads images from an array to allow for animation.
+   */
 
   loadImages(arr) {
     arr.forEach((path) => {

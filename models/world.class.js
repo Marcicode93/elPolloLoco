@@ -34,6 +34,7 @@ class World {
   bossBarDrawn = false;
   endbossDrawn = false;
   endbossReached = false;
+  damageDone = false;
 
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
@@ -47,6 +48,10 @@ class World {
   setWorld() {
     this.character.world = this;
   }
+
+  /**
+   * Run all function ins the world and continously check for collisions
+   */
 
   run() {
     setInterval(() => {
@@ -116,9 +121,18 @@ class World {
 
   generateCoins(count) {
     let coins = [];
+    const minDistance = 200;
+
     for (let i = 0; i < count; i++) {
       let x = 600 + Math.random() * 3000;
-      let y = Math.random() + 160;
+      let y = 160;
+
+      if (coins.length > 0) {
+        let lastCoin = coins[coins.length - 1];
+        while (Math.abs(lastCoin.x - x) < minDistance) {
+          x = 600 + Math.random() * 3000;
+        }
+      }
       coins.push(new Coin(x, y));
     }
     return coins;
@@ -197,9 +211,14 @@ class World {
   checkCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
+        if (this.character.isColliding(enemy) && !enemy.damageDone) {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
+          enemy.damageDone = true;
+
+          setTimeout(() => {
+            enemy.damageDone = false;
+          }, 1000);
         }
       });
     }, 100);
@@ -274,13 +293,39 @@ class World {
     }
   }
 
+  /**
+   * draw the World and all elements in it (like character, endboss, statusbars)
+   */
+
   draw() {
+    this.clearCanvas();
+    this.drawBackgroundObjects();
+    this.drawStatusbars();
+    this.drawCollectables();
+    this.addToMap(this.character);
+    this.drawBossBar();
+    this.drawEnemies();
+    this.endBossDrawn();
+    this.drawThrowableObjects();
+
+    let self = this;
+    requestAnimationFrame(function () {
+      self.draw();
+    });
+  }
+
+  clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  drawBackgroundObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
     this.addObjectsToMap(this.level.clouds);
+  }
 
+  drawStatusbars() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
@@ -292,21 +337,23 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.bottleBar);
     this.ctx.translate(this.camera_x, 0);
+  }
 
-    this.addObjectsToMap(this.coins);
-    this.addObjectsToMap(this.bottles);
-    this.addToMap(this.character);
-
+  drawBossBar() {
     if (this.character.x > 3500 || this.bossBarDrawn) {
       this.bossBarDrawn = true;
       this.ctx.translate(-this.camera_x, 0);
       this.addToMap(this.endbossBar);
       this.ctx.translate(this.camera_x, 0);
     }
+  }
 
+  drawEnemies() {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.enemies_small);
+  }
 
+  endBossDrawn() {
     if (this.character.x > 3500 || this.endbossDrawn) {
       this.endbossDrawn = true;
       if (this.endbossReached == false) {
@@ -315,13 +362,16 @@ class World {
       }
       this.addToMap(this.level.endboss);
     }
+  }
+
+  drawCollectables() {
+    this.addObjectsToMap(this.coins);
+    this.addObjectsToMap(this.bottles);
+  }
+
+  drawThrowableObjects() {
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
-
-    let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
-    });
   }
 
   addObjectsToMap(objects) {
@@ -341,6 +391,10 @@ class World {
       this.flipImageBack(mo);
     }
   }
+
+  /**
+   * Turn character picture to the other side, when walking left.
+   */
 
   flipImage(mo) {
     this.ctx.save();

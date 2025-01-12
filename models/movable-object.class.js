@@ -5,6 +5,10 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5;
   isMoving = false;
 
+  /**
+   * applies gravity forces to the world dragging elements down, when in the air.
+   */
+
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) this.y -= this.speedY;
@@ -12,12 +16,20 @@ class MovableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
+  /**
+   * checks, if element is in the air.
+   */
+
   isAboveGround() {
     if (this instanceof ThrowableObject) {
       return true;
     }
     return this.y < 160;
   }
+
+  /**
+   * checks, if two elements in the world are colliding with each other. Hitbox has been adjusted to make it more precise.
+   */
 
   isColliding(mo) {
     const hitboxX = this.x;
@@ -33,21 +45,45 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * applies damage to a character or enemy.
+   */
+
   hit() {
-    if (
-      this.world.character.isAboveGround() &&
-      this.world.character.speedY < 0
-    ) {
-      this.energy;
-    } else {
-      this.energy -= 2;
-      if (this.energy < 0) {
-        this.energy = 0;
-      } else {
-        this.lastHit = new Date().getTime();
-      }
-    }
+    if (this.isInCooldown()) return;
+  
+    if (this.isAirHit()) return;
+  
+    this.applyDamage(4);
+    this.updateLastHit();
   }
+
+  /**
+   * sets cooldown for damage reception.
+   */
+  
+  isInCooldown() {
+    const now = new Date().getTime();
+    return this.lastHit && now - this.lastHit < 60; // 1 Sekunde Cooldown
+  }
+  
+  isAirHit() {
+    return this.world.character.isAboveGround() && this.world.character.speedY < 0;
+  }
+  
+  applyDamage(amount) {
+    this.energy -= amount;
+    if (this.energy < 0) this.energy = 0;
+  }
+  
+  updateLastHit() {
+    this.lastHit = new Date().getTime();
+  }
+  
+
+  /**
+   * applies damage to the endboss; endboss has its own hit function to make the game experience better and not have the endboss die immediately.
+   */
 
   hitBoss() {
     this.energy -= 10;
@@ -58,6 +94,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * checks, if hurt.
+   */
+
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
@@ -65,9 +105,17 @@ class MovableObject extends DrawableObject {
     return timepassed < 1;
   }
 
+  /**
+   * returns that status is dead.
+   */
+
   isDead() {
     return this.energy == 0;
   }
+
+  /**
+   * function to play different images in an array to act like an animation.
+   */
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -75,6 +123,10 @@ class MovableObject extends DrawableObject {
     this.img = this.ImageCache[path];
     this.currentImage++;
   }
+
+  /**
+   * move in the world.
+   */
 
   moveRight() {
     this.x += this.speed;
@@ -97,6 +149,10 @@ class MovableObject extends DrawableObject {
       this.isMoving = false;
     }
   }
+
+/**
+ * jump function
+ */
 
   jump() {
     this.speedY = 30;

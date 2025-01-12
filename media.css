@@ -9,6 +9,15 @@
     margin-top: 100px;
   }
 
+  .sound-toggle {
+    margin-top: 80px !important;
+  }
+
+  .sound-toggle img {
+    width: 40px;
+    height: 40px;
+  }
+
   .btn {
     margin-top: 10px;
   }
@@ -60,7 +69,6 @@
     position: absolute;
     margin-bottom: 250px;
     bottom: 0;
-    width: 100%;
     padding: 10px;
     z-index: 1000;
   }
@@ -104,6 +112,11 @@
   .controls-mobile {
     margin-bottom: 100px;
   }
+
+  .game-win-img {
+    width: 720px;
+    height: 390px !important;
+  }
 }
 
 @media only screen and (max-width: 1025px) and (hover: none) and (pointer: coarse) {
@@ -126,14 +139,14 @@
 }
 
 /* iphone 14 pro max */
-@media only screen and (max-width: 940px) and (hover: none) and (pointer: coarse) {
+@media only screen and (max-width: 950px) and (hover: none) and (pointer: coarse) {
   canvas {
-    width: 760px;
-    height: 370px !important;
+    width: 600px !important;
+    height: 330px !important;
   }
 
   .sound-toggle {
-    margin-top: 160px !important;
+    margin-top: 220px !important;
   }
 
   .sound-toggle img {
@@ -142,22 +155,17 @@
   }
 
   .controls-mobile {
-    padding-top: 10px !important;
-    margin-bottom: 0px !important;
+    padding-top: 0px !important;
+    margin-bottom: 30px !important;
   }
 
   .controls-mobile img {
-    width: 40px;
-  }
-
-  .canvas-screen {
-    width: 760px;
-    height: 350px !important;
+    width: 32px;
   }
 
   #start-screen img {
-    width: 760px;
-    height: 350px !important;
+    width: 600px !important;
+    height: 330px !important;
   }
 
   .btn {
@@ -168,10 +176,9 @@
 
   footer {
     margin-top: 0px;
-    width: 100% !important;
     padding-top: 8px !important;
     padding-bottom: 8px !important;
-    font-size: 16px !important;
+    font-size: 12px !important;
   }
 
   .game-win-img {
@@ -180,120 +187,32 @@
   }
 }
 
-@media only screen and (max-width: 930px) and (hover: none) and (pointer: coarse) {
-  canvas {
-    width: 760px;
-    height: 380px !important;
-  }
-
-  .controls-mobile img {
-    width: 40px;
-  }
-
-  #start-screen img {
-    width: 760px;
-    height: 380px !important;
-  }
-
-  .btn {
-    width: 100px;
-    font-size: 18px;
-    height: 40px;
-  }
-
-  footer {
-    margin-top: 0px;
-  }
-}
-
-@media only screen and (max-width: 915px) and (hover: none) and (pointer: coarse) {
-  canvas {
-    height: 360px !important;
-  }
-
-  .controls-mobile {
-    padding-bottom: 20px;
-  }
-
-  #start-screen img {
-    height: 360px !important;
-  }
-}
-
-/* iphone 14 pro max */
 @media only screen and (max-width: 900px) and (hover: none) and (pointer: coarse) {
   canvas {
-    width: 760px;
-    height: 350px !important;
-  }
-
-  .controls-mobile {
-    padding-bottom: 40px;
+    width: 550px !important;
+    height: 300px !important;
   }
 
   #start-screen img {
-    width: 760px;
-    height: 350px !important;
+    width: 550px !important;
+    height: 300px !important;
   }
 
-  footer {
-    margin-top: 12px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 16px !important;
-  }
-}
-
-/* iphone XR */
-@media only screen and (max-width: 897px) and (hover: none) and (pointer: coarse) {
-  canvas {
-    width: 760px;
-    height: 350px !important;
+  .canvas-screen {
+    width: 550px;
+    height: 300px !important;
   }
 
   .controls-mobile {
-    padding-bottom: 60px;
-  }
-
-  #start-screen img {
-    width: 760px;
-    height: 350px !important;
-  }
-
-  footer {
-    margin-top: 12px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 16px !important;
-  }
-}
-
-@media only screen and (max-width: 860px) and (hover: none) and (pointer: coarse) {
-  canvas {
-    width: 760px;
-    height: 360px !important;
-  }
-
-  .controls-mobile {
-    padding-bottom: 30px;
-  }
-
-  #start-screen img {
-    width: 760px;
-    height: 360px !important;
-  }
-
-  footer {
-    margin-top: 0px;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-bottom: 30px !important;
+    margin-bottom: 0px !important;
   }
 }
 
 @media only screen and (max-width: 760px) and (hover: none) and (pointer: coarse) {
   canvas {
     width: 100% !important;
-    height: 330px !important;
+    height: 300px !important;
   }
 
   .controls-mobile {
@@ -301,41 +220,21 @@
   }
 
   #start-screen {
-    width: 760px;
-    height: 330px !important;
+    height: 300px !important;
   }
 
   .game-win-img {
     width: 500px !important;
     height: 300px !important;
   }
-}
-
-@media only screen and (max-width: 700px) and (hover: none) and (pointer: coarse) {
-  canvas {
-    margin-bottom: 0px;
-  }
-
-  .sound-toggle {
-    margin-top: 20px !important;
-  }
 
   .controls-mobile {
-    margin-bottom: 10px;
-  }
-
-  #start-screen {
-    height: 330px !important;
-    width: 100% !important;
-    margin-bottom: 0px;
-  }
-
-  footer {
-    margin-top: 2px;
+    padding-top: 0px !important;
+    margin-bottom: 0px !important;
   }
 }
 
-@media only screen and (max-width: 500px) and (hover: none) and (pointer: coarse) {
+@media only screen and (max-width: 600px) and (hover: none) and (pointer: coarse) {
   canvas {
     width: 100%;
     height: 330px !important;

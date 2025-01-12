@@ -2,8 +2,8 @@ class ThrowableObject extends MovableObject {
   constructor(x, y, character) {
     super();
     this.x = x;
-    this.y = y; 
-    this.character = character; 
+    this.y = y;
+    this.character = character;
     this.height = 80;
     this.width = 60;
     this.bottleThrown = false;
@@ -18,8 +18,12 @@ class ThrowableObject extends MovableObject {
     "img_pollo_locco/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
+  /**
+   * This function allows the character to throw bottles at enemies.
+   */
+
   throw() {
-    this.bottleThrown = true; 
+    this.bottleThrown = true;
     this.speedY = 20;
     this.speedX = this.character.otherDirection ? -20 : 20;
     this.playAnimation(this.images_throwing);

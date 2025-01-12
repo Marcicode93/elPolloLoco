@@ -74,7 +74,6 @@ class Character extends MovableObject {
 
   world;
 
-
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.images_walking);
@@ -87,6 +86,10 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * animates the character, when performing certain actions.
+   */
+
   animate() {
     this.setupMovementAnimation();
     this.setupStatusAnimation();
@@ -98,6 +101,10 @@ class Character extends MovableObject {
       this.updateCamera();
     }, 1000 / 60);
   }
+
+  /**
+   * allows the character to move left and right & jump in the world or idle.
+   */
 
   handleMovement() {
     if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
@@ -121,6 +128,10 @@ class Character extends MovableObject {
     this.world.camera_x = -this.x + 100;
   }
 
+  /**
+   * lets the character move in the respective direction.
+   */
+
   moveRight() {
     super.moveRight();
     this.otherDirection = false;
@@ -132,6 +143,10 @@ class Character extends MovableObject {
     this.otherDirection = true;
     this.world.walking_char_sound.play();
   }
+
+  /**
+   * an animation is played, once the character is not currently moving.
+   */
 
   idling() {
     if (!this.isNotMoving) {
@@ -155,6 +170,10 @@ class Character extends MovableObject {
       this.handleCharacterAnimation();
     }, 50);
   }
+
+  /**
+   * handles certain status effects of the character like getting hurt or diying.
+   */
 
   handleStatusEffects() {
     if (this.isHurt()) {

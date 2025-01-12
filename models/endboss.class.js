@@ -50,7 +50,6 @@ class Endboss extends MovableObject {
   hadFirstContact = true;
   isCurrentlyHurt = false;
 
-
   constructor() {
     super().loadImage(this.images_alert[0]);
     this.loadImages(this.images_alert);
@@ -63,6 +62,10 @@ class Endboss extends MovableObject {
     this.randomizeAttack();
     this.performAttack();
   }
+
+  /**
+   * performs an attack with random x coordinates (distance / reach)
+   */
 
   performAttack() {
     if (this.isDead() || !this.attackCooldown) {
@@ -81,6 +84,10 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * executes attack, normal attack or fly attack with it's own specifics.
+   */
+
   executeAttack(originalX, originalY, forwardDistance, forwardDuration) {
     if (Math.random() < 0.5) {
       this.flyAndAttack(originalX, originalY, forwardDistance, forwardDuration);
@@ -95,6 +102,10 @@ class Endboss extends MovableObject {
     });
   }
 
+  /**
+   * fly attack by the endboss to have more attack patterns.
+   */
+
   flyAndAttack(originalX, originalY, forwardDistance, forwardDuration) {
     const forwardX = originalX - forwardDistance;
     const flyHeight = originalY - 150;
@@ -107,6 +118,10 @@ class Endboss extends MovableObject {
       });
     });
   }
+
+  /**
+   * allows endboss to move in different directions with different speeds.
+   */
 
   moveWithSpeedAndHeight(targetX, targetY, duration, callback) {
     const startTime = Date.now();
@@ -160,16 +175,28 @@ class Endboss extends MovableObject {
     }, 20);
   }
 
+  /**
+   * randomizes, which attack is going to be played.
+   */
+
   randomizeAttack() {
     if (Math.random() < 0.5) {
       this.performAttack();
     }
   }
 
+  /**
+   * is used to animate the endboss.
+   */
+
   animate() {
     this.setupDeathCheck();
     this.setupHurtAnimation();
   }
+
+  /**
+   * checks if endboss is dead.
+   */
 
   setupDeathCheck() {
     setInterval(() => {
@@ -180,6 +207,10 @@ class Endboss extends MovableObject {
       }
     }, 200);
   }
+
+  /**
+   * handles death of endboss.
+   */
 
   handleDeath() {
     this.stopMovement();
@@ -193,6 +224,10 @@ class Endboss extends MovableObject {
     }, 3000);
   }
 
+  /**
+   * allows endboss to move through the world.
+   */
+
   handleMovementAndAnimation() {
     this.moveRandom();
     this.randomizeAnimation();
@@ -205,6 +240,10 @@ class Endboss extends MovableObject {
       this.playAnimation(this.images_attack);
     }
   }
+
+  /**
+   * endboss hurt animation.
+   */
 
   setupHurtAnimation() {
     setInterval(() => {
@@ -221,6 +260,10 @@ class Endboss extends MovableObject {
       this.isCurrentlyHurt = false;
     }, 1000);
   }
+
+  /**
+   * randomizes the animation that is being played to make the endboss feel more alive.
+   */
 
   randomizeAnimation() {
     const random = Math.random();

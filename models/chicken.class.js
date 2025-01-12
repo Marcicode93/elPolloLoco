@@ -25,6 +25,10 @@ class Chicken extends MovableObject {
     this.animate();
   }
 
+  /**
+   * animates normal chicken.
+   */
+
   animate() {
     setInterval(() => {
       this.moveLeft();
@@ -33,7 +37,6 @@ class Chicken extends MovableObject {
     setInterval(() => {
       this.playAnimation(this.images_walking);
     }, 100);
-
     this.deathAnimation = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.images_dead);
