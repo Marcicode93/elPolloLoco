@@ -143,7 +143,7 @@ function reloadPage() {
 
 function checkDevice() {
   const isMobile =
-    window.innerWidth <= 768 && /Mobi|Android/i.test(navigator.userAgent);
+    window.innerWidth <= 500 && /Mobi|Android/i.test(navigator.userAgent);
 
   if (isMobile) {
     document.getElementById("orientation-message").style.display = "flex";
