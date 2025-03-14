@@ -66,7 +66,6 @@ class Endboss extends MovableObject {
   /**
    * performs an attack with random x coordinates (distance / reach)
    */
-
   performAttack() {
     if (this.isDead() || !this.attackCooldown) {
       this.attackCooldown = true;
@@ -87,7 +86,6 @@ class Endboss extends MovableObject {
   /**
    * executes attack, normal attack or fly attack with it's own specifics.
    */
-
   executeAttack(originalX, originalY, forwardDistance, forwardDuration) {
     if (Math.random() < 0.5) {
       this.flyAndAttack(originalX, originalY, forwardDistance, forwardDuration);
@@ -105,7 +103,6 @@ class Endboss extends MovableObject {
   /**
    * fly attack by the endboss to have more attack patterns.
    */
-
   flyAndAttack(originalX, originalY, forwardDistance, forwardDuration) {
     const forwardX = originalX - forwardDistance;
     const flyHeight = originalY - 150;
@@ -122,7 +119,6 @@ class Endboss extends MovableObject {
   /**
    * allows endboss to move in different directions with different speeds.
    */
-
   moveWithSpeedAndHeight(targetX, targetY, duration, callback) {
     const startTime = Date.now();
     const startX = this.x;
@@ -142,6 +138,15 @@ class Endboss extends MovableObject {
     );
   }
 
+  /**
+   * Starts the movement animation to a target position.
+   * @param {number} startTime - The starting timestamp.
+   * @param {number} duration - The duration of the movement in milliseconds.
+   * @param {Object} distances - The distances to move in x and y directions.
+   * @param {number} targetX - The target X position.
+   * @param {number} targetY - The target Y position.
+   * @param {Function} callback - The callback function to execute after movement.
+   */
   startMovement(startTime, duration, distances, targetX, targetY, callback) {
     const moveInterval = setInterval(() => {
       const elapsedTime = Date.now() - startTime;
@@ -158,6 +163,12 @@ class Endboss extends MovableObject {
     }, 20);
   }
 
+  /**
+   * Moves the endboss to a target X position with specified speed.
+   * @param {number} targetX - The target X position.
+   * @param {number} duration - The duration of the movement in milliseconds.
+   * @param {Function} callback - The callback function to execute after movement.
+   */
   moveWithSpeed(targetX, duration, callback) {
     const startTime = Date.now();
     const startX = this.x;
@@ -178,7 +189,6 @@ class Endboss extends MovableObject {
   /**
    * randomizes, which attack is going to be played.
    */
-
   randomizeAttack() {
     if (Math.random() < 0.5) {
       this.performAttack();
@@ -188,7 +198,6 @@ class Endboss extends MovableObject {
   /**
    * is used to animate the endboss.
    */
-
   animate() {
     this.setupDeathCheck();
     this.setupHurtAnimation();
@@ -197,7 +206,6 @@ class Endboss extends MovableObject {
   /**
    * checks if endboss is dead.
    */
-
   setupDeathCheck() {
     setInterval(() => {
       if (this.isDead()) {
@@ -211,7 +219,6 @@ class Endboss extends MovableObject {
   /**
    * handles death of endboss.
    */
-
   handleDeath() {
     this.stopMovement();
     this.playAnimation(this.images_dead);
@@ -227,7 +234,6 @@ class Endboss extends MovableObject {
   /**
    * allows endboss to move through the world.
    */
-
   handleMovementAndAnimation() {
     this.moveRandom();
     this.randomizeAnimation();
@@ -244,7 +250,6 @@ class Endboss extends MovableObject {
   /**
    * endboss hurt animation.
    */
-
   setupHurtAnimation() {
     setInterval(() => {
       if (this.isCurrentlyHurt) {
@@ -254,6 +259,9 @@ class Endboss extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Marks the endboss as hurt and triggers hurt animation for 1 second.
+   */
   isHit() {
     this.isCurrentlyHurt = true;
     setTimeout(() => {
@@ -264,7 +272,6 @@ class Endboss extends MovableObject {
   /**
    * randomizes the animation that is being played to make the endboss feel more alive.
    */
-
   randomizeAnimation() {
     const random = Math.random();
 
@@ -278,6 +285,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Stops the endboss movement by overriding the moveRandom method.
+   */
   stopMovement() {
     this.moveRandom = () => {};
   }

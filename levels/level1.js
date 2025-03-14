@@ -1,24 +1,50 @@
 let level1;
 
+/**
+ * Initializes the first level of the game with enemies, clouds, and background objects.
+ */
 function initLevel() {
   level1 = new Level(
-    (enemies = [
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-      new Chicken(),
-    ]),
-    (enemies_small = [
-      new Smallchicken(),
-      new Smallchicken(),
-      new Smallchicken(),
-      new Smallchicken(),
-    ]),
+    /**
+     * Array of regular enemy chickens.
+     * @type {Chicken[]}
+     */
+    (
+      enemies = [
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+      ]
+    ),
+    /**
+     * Array of small enemy chickens.
+     * @type {Smallchicken[]}
+     */
+    (
+      enemies_small = [
+        new Smallchicken(),
+        new Smallchicken(),
+        new Smallchicken(),
+        new Smallchicken(),
+      ]
+    ),
+    /**
+     * The endboss of the level.
+     * @type {Endboss}
+     */
     (endboss = new Endboss()),
-    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
+    [
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+    ],
 
     [
       new BackgroundObject(

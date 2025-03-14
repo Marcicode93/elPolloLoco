@@ -3,6 +3,9 @@ let keyboard = new Keyboard();
 let isMuted = false;
 music = null;
 
+/**
+ * Initializes the canvas element for the game.
+ */
 function init() {
   canvas = document.getElementById("canvas");
 }
@@ -10,7 +13,6 @@ function init() {
 /**
  * this function starts the game removes the start / win / game over screen so that the player sees the canvas.
  */
-
 function startGame() {
   canvas = document.getElementById("canvas");
   canvas.classList.remove("display-none");
@@ -29,17 +31,22 @@ function startGame() {
 /**
  * handle game state.
  */
-
 function handleGameOver() {
   let gameOver = document.getElementById("game-over-screen");
   gameOver.classList.add("display-none");
 }
 
+/**
+ * Hides the start screen.
+ */
 function handleGameStart() {
   gameStart = document.getElementById("start-screen");
   gameStart.classList.add("display-none");
 }
 
+/**
+ * Hides the win screen.
+ */
 function handleGameWin() {
   let win = document.getElementById("win-screen");
   win.classList.add("display-none");
@@ -48,7 +55,6 @@ function handleGameWin() {
 /**
  * this function allows to mute the music by clicking on the sound toggle button after starting the game.
  */
-
 function checkMusic() {
   if (isMuted) {
     let audioElements = getAudioElements();
@@ -64,9 +70,8 @@ function checkMusic() {
 
 /**
  * this generates an array with all the audio elements, as soon as the world is created.
- * 
+ *
  */
-
 function getAudioElements() {
   if (!world) return [];
   return [
@@ -93,9 +98,8 @@ function getAudioElements() {
 }
 
 /**
- * this updates the displayed image of the sound toggle 
+ * this updates the displayed image of the sound toggle
  */
-
 function updateSoundToggles(isMuted) {
   let soundToggle1 = document.getElementById("soundtoggle1");
   let soundToggle2 = document.getElementById("soundtoggle2");
@@ -106,7 +110,6 @@ function updateSoundToggles(isMuted) {
 /**
  * this function toggles the sound on or off.
  */
-
 function toggleSound() {
   isMuted = !isMuted;
 
@@ -123,7 +126,6 @@ function toggleSound() {
 /**
  * this function mutes the other music playing, when e.g. the endboss is reached. Main music stops then and endboss music is being played.
  */
-
 function muteMusic() {
   world.endbossMusic.pause();
   world.game_sound.pause();
@@ -132,7 +134,6 @@ function muteMusic() {
 /**
  * this function is used to switch the music to the needed music (e.g. when endboss is reached)
  */
-
 function switchMusic() {
   muteMusic();
   if (world.endbossReached == true) {
@@ -149,7 +150,6 @@ function switchMusic() {
 /**
  * this function shows the game over screen and ends the game, when the player dies.
  */
-
 function stopGameOver() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
   gameOverScreen();
@@ -159,7 +159,6 @@ function stopGameOver() {
 /**
  * this function ends the game, when the player wins.
  */
-
 function stopGame() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
   winScreen();
@@ -169,28 +168,32 @@ function stopGame() {
 /**
  * display win or game over screen.
  */
-
 function gameOverScreen() {
   let gameOver = document.getElementById("game-over-screen");
   gameOver.classList.toggle("display-none");
   world.game_over_sound.play();
 }
 
+/**
+ * Displays the win screen and plays the win sound.
+ */
 function winScreen() {
   let win = document.getElementById("win-screen");
   win.classList.toggle("display-none");
   world.win_sound.play();
 }
 
+/**
+ * Reloads the page to restart the game.
+ */
 function reloadPage() {
   location.reload();
 }
 
 /**
- * this function checks the used device and in case the user wants to play the game in vertical mode on their smartphone, 
+ * this function checks the used device and in case the user wants to play the game in vertical mode on their smartphone,
  * a message is displayed to tilt the phone
  */
-
 function checkDevice() {
   const isMobile =
     window.innerWidth <= 600 && /Mobi|Android/i.test(navigator.userAgent);
@@ -206,9 +209,9 @@ window.onload = checkDevice;
 window.onresize = checkDevice;
 
 /**
- * registers the clicked buttons on the keyboard to move the character in the world.
+ * Registers keydown events to update the keyboard object for character movement.
+ * @param {KeyboardEvent} e - The keydown event object.
  */
-
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
     keyboard.right = true;
@@ -233,6 +236,10 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+/**
+ * Registers keyup events to update the keyboard object when keys are released.
+ * @param {KeyboardEvent} e - The keyup event object.
+ */
 window.addEventListener("keyup", (e) => {
   if (e.keyCode == 39) {
     keyboard.right = false;

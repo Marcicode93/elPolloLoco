@@ -45,6 +45,9 @@ class World {
     this.run();
   }
 
+  /**
+   * Links the world instance to the character for reference.
+   */
   setWorld() {
     this.character.world = this;
   }
@@ -52,7 +55,6 @@ class World {
   /**
    * Run all function ins the world and continously check for collisions
    */
-
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -69,6 +71,9 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks for jumping collisions with regular enemies and handles damage or removal.
+   */
   isJumpingOn() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
@@ -87,6 +92,9 @@ class World {
     }, 50);
   }
 
+  /**
+   * Checks for jumping collisions with small enemies and handles damage or removal.
+   */
   isJumpingOnSmall() {
     setInterval(() => {
       this.level.enemies_small.forEach((enemy) => {
@@ -105,6 +113,10 @@ class World {
     }, 50);
   }
 
+  /**
+   * Removes a regular enemy from the level's enemy array.
+   * @param {Object} enemy - The enemy object to remove.
+   */
   removeEnemy(enemy) {
     const index = this.level.enemies.indexOf(enemy);
     if (index > -1) {
@@ -112,6 +124,10 @@ class World {
     }
   }
 
+  /**
+   * Removes a small enemy from the level's small enemy array.
+   * @param {Object} enemy - The small enemy object to remove.
+   */
   removeEnemySmall(enemy) {
     const index = this.level.enemies_small.indexOf(enemy);
     if (index > -1) {
@@ -119,6 +135,11 @@ class World {
     }
   }
 
+  /**
+   * Generates a specified number of coins with random positions.
+   * @param {number} count - The number of coins to generate.
+   * @returns {Coin[]} Array of generated Coin objects.
+   */
   generateCoins(count) {
     let coins = [];
     const minDistance = 200;
@@ -138,6 +159,9 @@ class World {
     return coins;
   }
 
+  /**
+   * Checks for coin collection by the character and updates the coin bar.
+   */
   checkCoinCollection() {
     this.coins = this.coins.filter((coin) => {
       if (this.checkCharacterCollidingCoin(coin)) {
@@ -149,6 +173,11 @@ class World {
     });
   }
 
+  /**
+   * Checks if the character is colliding with a coin.
+   * @param {Coin} coin - The coin object to check collision with.
+   * @returns {boolean} True if colliding, false otherwise.
+   */
   checkCharacterCollidingCoin(coin) {
     return (
       this.character.x + this.character.width > coin.x &&
@@ -158,6 +187,9 @@ class World {
     );
   }
 
+  /**
+   * Checks for bottle collection by the character and updates the bottle bar.
+   */
   checkBottleCollection() {
     this.bottles = this.bottles.filter((bottle) => {
       if (this.keyboard.b && this.checkCharacterCollidingBottle(bottle)) {
@@ -169,6 +201,11 @@ class World {
     });
   }
 
+  /**
+   * Checks if the character is colliding with a bottle.
+   * @param {Bottle} bottle - The bottle object to check collision with.
+   * @returns {boolean} True if colliding and 'b' key pressed, false otherwise.
+   */
   checkCharacterCollidingBottle(bottle) {
     return (
       this.character.x + this.character.width > bottle.x &&
@@ -178,6 +215,11 @@ class World {
     );
   }
 
+  /**
+   * Generates a specified number of bottles with spaced positions.
+   * @param {number} count - The number of bottles to generate.
+   * @returns {Bottle[]} Array of generated Bottle objects.
+   */
   generateBottles(count) {
     let bottles = [];
     let startX = 3400;
@@ -193,6 +235,9 @@ class World {
     return bottles;
   }
 
+  /**
+   * Handles throwing of bottles by the character if available.
+   */
   checkThrowObjects() {
     if (this.keyboard.d && this.bottleBar.percentage > 0) {
       let bottle = new ThrowableObject(
@@ -208,6 +253,9 @@ class World {
     }
   }
 
+  /**
+   * Checks collisions between character and regular enemies.
+   */
   checkCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
@@ -224,6 +272,9 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks collisions between character and small enemies.
+   */
   checkCollisionsSmall() {
     setInterval(() => {
       this.level.enemies_small.forEach((enemy) => {
@@ -235,6 +286,9 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks collisions between character and the endboss.
+   */
   checkCollisionsEndboss() {
     setInterval(() => {
       if (this.character.isColliding(this.level.endboss)) {
@@ -244,6 +298,9 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks collisions between thrown bottles and regular enemies.
+   */
   checkBottleCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
@@ -258,6 +315,9 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks collisions between thrown bottles and small enemies.
+   */
   checkBottleCollisionsSmall() {
     setInterval(() => {
       this.level.enemies_small.forEach((enemy) => {
@@ -272,9 +332,12 @@ class World {
     }, 100);
   }
 
+  /**
+   * Checks collisions between thrown bottles and the endboss.
+   */
   checkBottleCollisionsEndboss() {
     setInterval(() => {
-      this.throwableObjects.forEach((bottle) => {
+      this.throwableObjects.forEach((bottle, index) => {
         if (bottle.isColliding(endboss)) {
           endboss.isHit();
           endboss.hitBoss();
@@ -286,6 +349,10 @@ class World {
     }, 100);
   }
 
+  /**
+   * Removes a thrown bottle from the throwableObjects array.
+   * @param {ThrowableObject} bottle - The bottle object to remove.
+   */
   removeBottle(bottle) {
     const index = this.throwableObjects.indexOf(bottle);
     if (index > -1) {
@@ -296,7 +363,6 @@ class World {
   /**
    * draw the World and all elements in it (like character, endboss, statusbars)
    */
-
   draw() {
     this.clearCanvas();
     this.drawBackgroundObjects();
@@ -314,10 +380,16 @@ class World {
     });
   }
 
+  /**
+   * Clears the entire canvas for redrawing.
+   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
+  /**
+   * Draws background objects and clouds with camera translation.
+   */
   drawBackgroundObjects() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
@@ -325,6 +397,9 @@ class World {
     this.addObjectsToMap(this.level.clouds);
   }
 
+  /**
+   * Draws the status bars (health, coins, bottles) without camera translation.
+   */
   drawStatusbars() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
@@ -339,6 +414,9 @@ class World {
     this.ctx.translate(this.camera_x, 0);
   }
 
+  /**
+   * Draws the endboss health bar when the character reaches a certain point.
+   */
   drawBossBar() {
     if (this.character.x > 3500 || this.bossBarDrawn) {
       this.bossBarDrawn = true;
@@ -348,11 +426,17 @@ class World {
     }
   }
 
+  /**
+   * Draws all enemies (regular and small) in the world.
+   */
   drawEnemies() {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.enemies_small);
   }
 
+  /**
+   * Draws the endboss when the character reaches a certain point and switches music.
+   */
   endBossDrawn() {
     if (this.character.x > 3500 || this.endbossDrawn) {
       this.endbossDrawn = true;
@@ -364,22 +448,36 @@ class World {
     }
   }
 
+  /**
+   * Draws all collectable items (coins and bottles) in the world.
+   */
   drawCollectables() {
     this.addObjectsToMap(this.coins);
     this.addObjectsToMap(this.bottles);
   }
 
+  /**
+   * Draws all throwable objects with camera translation.
+   */
   drawThrowableObjects() {
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Adds multiple objects to the map for rendering.
+   * @param {Object[]} objects - Array of objects to add to the map.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Adds a single movable object to the map, handling direction flipping if needed.
+   * @param {MovableObject} mo - The movable object to add to the map.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -395,7 +493,6 @@ class World {
   /**
    * Turn character picture to the other side, when walking left.
    */
-
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -403,6 +500,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Restores the flipped image back to its original state.
+   * @param {MovableObject} mo - The movable object to restore.
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();

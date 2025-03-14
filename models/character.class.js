@@ -87,14 +87,16 @@ class Character extends MovableObject {
   }
 
   /**
-   * animates the character, when performing certain actions.
+   * Animates the character based on movement and status conditions.
    */
-
   animate() {
     this.setupMovementAnimation();
     this.setupStatusAnimation();
   }
 
+  /**
+   * Sets up the movement animation loop running at 60 FPS.
+   */
   setupMovementAnimation() {
     setInterval(() => {
       this.handleMovement();
@@ -103,9 +105,8 @@ class Character extends MovableObject {
   }
 
   /**
-   * allows the character to move left and right & jump in the world or idle.
+   * Handles character movement based on keyboard input and updates idle state.
    */
-
   handleMovement() {
     if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -124,20 +125,25 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Updates the camera position based on the character's x-coordinate.
+   */
   updateCamera() {
     this.world.camera_x = -this.x + 100;
   }
 
   /**
-   * lets the character move in the respective direction.
+   * Moves the character to the right and plays walking sound.
    */
-
   moveRight() {
     super.moveRight();
     this.otherDirection = false;
     this.world.walking_char_sound.play();
   }
 
+  /**
+   * Moves the character to the left and plays walking sound.
+   */
   moveLeft() {
     super.moveLeft();
     this.otherDirection = true;
@@ -147,7 +153,6 @@ class Character extends MovableObject {
   /**
    * an animation is played, once the character is not currently moving.
    */
-
   idling() {
     if (!this.isNotMoving) {
       this.isNotMoving = true;
@@ -164,6 +169,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Sets up the status animation loop running at 20 FPS.
+   */
   setupStatusAnimation() {
     setInterval(() => {
       this.handleStatusEffects();
@@ -174,7 +182,6 @@ class Character extends MovableObject {
   /**
    * handles certain status effects of the character like getting hurt or diying.
    */
-
   handleStatusEffects() {
     if (this.isHurt()) {
       this.playAnimation(this.images_hurt);
@@ -188,6 +195,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Handles character animations based on current state (jumping or walking).
+   */
   handleCharacterAnimation() {
     if (this.isAboveGround()) {
       this.playAnimation(this.images_jumping);

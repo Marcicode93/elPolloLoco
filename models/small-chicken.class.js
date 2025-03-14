@@ -25,9 +25,8 @@ class Smallchicken extends MovableObject {
   }
 
   /**
-   * animates small chicken.
+   * animates small chicken object with the method move left and dies, if jumped on.
    */
-
   animate() {
     setInterval(() => {
       this.moveLeft();

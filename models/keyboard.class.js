@@ -15,7 +15,6 @@ class Keyboard {
   /**
    * keyboard actions on mobile devices.
    */
-
   bindBtsPressEvents() {
     document.getElementById("btn-left").addEventListener("touchstart", (e) => {
       e.preventDefault();

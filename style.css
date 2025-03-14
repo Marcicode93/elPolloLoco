@@ -8,7 +8,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .fullcontent {
@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-height: 100vh;
 }
 
 .canvas-screen {
@@ -43,6 +44,7 @@ h2 {
 }
 
 .main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,15 +52,20 @@ h2 {
   height: 100%;
   width: 100%;
   max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 90vh;
 }
 
 #canvas {
   width: 720px;
   height: 480px;
+  max-width: 100%;
 }
 
 #start-screen img {
   width: 720px;
+  max-width: 100%;
   height: 480px;
   padding: 0;
 }
@@ -186,6 +193,7 @@ footer a:hover {
   border-radius: 10px;
   padding-left: 12px;
   padding-right: 12px;
+  max-width: 100%;
 }
 
 .controls span {
@@ -244,4 +252,41 @@ h1 {
   font-size: 36px;
   color: rgb(255, 249, 249);
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 600px) {
+  canvas {
+    width: 100%;
+    height: 330px !important;
+    margin-bottom: 12px;
+  }
+
+  .sound-toggle img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #orientation-message img {
+    width: 200px;
+  }
+
+  #orientation-message {
+    font-size: 1em;
+  }
+
+  #start-screen {
+    height: 330px !important;
+    width: 300px !important;
+    margin-bottom: 12px;
+  }
+
+  .controls {
+    max-width: 100% !important;
+    width: 300px;
+  }
+
+  .controls img {
+    width: 20px;
+    height: 20px;
+  }
 }

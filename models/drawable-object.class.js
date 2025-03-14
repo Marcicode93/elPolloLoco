@@ -7,6 +7,10 @@ class DrawableObject {
   width = 100;
   height = 150;
 
+  /**
+   * Loads a single image from the specified path.
+   * @param {string} path - The file path to the image.
+   */
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
@@ -15,7 +19,6 @@ class DrawableObject {
   /**
    * draws image onto the canvas.
    */
-
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
@@ -23,7 +26,6 @@ class DrawableObject {
   /**
    * draws a frame around the elements in the world to allow for collision detection.
    */
-
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -45,7 +47,6 @@ class DrawableObject {
   /**
    * loads images from an array to allow for animation.
    */
-
   loadImages(arr) {
     arr.forEach((path) => {
       let img = new Image();
