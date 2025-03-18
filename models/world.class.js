@@ -35,6 +35,7 @@ class World {
   endbossDrawn = false;
   endbossReached = false;
   damageDone = false;
+  lastThrowTime = 0;
 
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
@@ -141,22 +142,40 @@ class World {
    * @returns {Coin[]} Array of generated Coin objects.
    */
   generateCoins(count) {
+    return this.createCoinArray(count);
+  }
+
+  /**
+   * Creates an array of coins by generating positions and instantiating Coin objects.
+   * @param {number} count - The number of coins to create.
+   * @returns {Coin[]} An array containing the generated Coin objects.
+   */
+  createCoinArray(count) {
     let coins = [];
-    const minDistance = 200;
-
     for (let i = 0; i < count; i++) {
-      let x = 600 + Math.random() * 3000;
-      let y = 160;
-
-      if (coins.length > 0) {
-        let lastCoin = coins[coins.length - 1];
-        while (Math.abs(lastCoin.x - x) < minDistance) {
-          x = 600 + Math.random() * 3000;
-        }
-      }
+      let { x, y } = this.generateCoinPosition(coins);
       coins.push(new Coin(x, y));
     }
     return coins;
+  }
+
+  /**
+   * Generates a position for a new coin, ensuring a minimum distance to the last coin.
+   * @param {Coin[]} coins - The array of existing coins to check against.
+   * @returns {{x: number, y: number}} An object containing the x and y coordinates for the new coin.
+   */
+  generateCoinPosition(coins) {
+    const minDistance = 600;
+    let x = 600 + Math.random() * 4000;
+    let y = 160;
+
+    if (coins.length > 0) {
+      let lastCoin = coins[coins.length - 1];
+      while (Math.abs(lastCoin.x - x) < minDistance) {
+        x = 600 + Math.random() * 4000;
+      }
+    }
+    return { x, y };
   }
 
   /**
@@ -238,18 +257,52 @@ class World {
   /**
    * Handles throwing of bottles by the character if available.
    */
-  checkThrowObjects() {
-    if (this.keyboard.d && this.bottleBar.percentage > 0) {
-      let bottle = new ThrowableObject(
-        this.character.x + 100,
-        this.character.y + 100,
-        this.character
-      );
-      this.throwableObjects.push(bottle);
-      this.bottleBar.setPercentage(this.bottleBar.percentage - 20);
-    } else if (this.keyboard.d && this.bottleBar.percentage === 0) {
+  // Neue Methoden
+  isThrowAllowed() {
+    let currentTime = Date.now();
+    return (
+      this.keyboard.d &&
+      this.bottleBar.percentage > 0 &&
+      currentTime - this.lastThrowTime >= 500
+    );
+  }
+
+  /**
+   * Throws a bottle by creating a new ThrowableObject and updating game state.
+   * Adds the bottle to the throwableObjects array, reduces the bottle bar percentage,
+   * and updates the last throw time.
+   */
+  throwBottle() {
+    let bottle = new ThrowableObject(
+      this.character.x + 100,
+      this.character.y + 100,
+      this.character
+    );
+    this.throwableObjects.push(bottle);
+    this.bottleBar.setPercentage(this.bottleBar.percentage - 20);
+    this.lastThrowTime = Date.now();
+  }
+
+  /**
+   * Plays a sound when the player attempts to throw a bottle but none are available.
+   * Checks if the throw key is pressed and the bottle bar is empty before playing the sound.
+   */
+  playNoBottleSound() {
+    if (this.keyboard.d && this.bottleBar.percentage === 0) {
       this.noBottle_sound.play();
-      return false;
+    }
+  }
+
+  /**
+   * Checks if a bottle can be thrown and executes the throw or plays a sound if not possible.
+   * Uses isThrowAllowed() to determine if conditions are met, then either throws a bottle
+   * or plays the no-bottle sound.
+   */
+  checkThrowObjects() {
+    if (this.isThrowAllowed()) {
+      this.throwBottle();
+    } else {
+      this.playNoBottleSound();
     }
   }
 

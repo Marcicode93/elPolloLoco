@@ -115,28 +115,53 @@ class Endboss extends MovableObject {
       });
     });
   }
+/**
+ * Captures the starting data for a movement, including time and position.
+ * @returns {{startTime: number, startX: number, startY: number}} An object with the start time and coordinates.
+ */
+getMovementStartData() {
+  return {
+    startTime: Date.now(),
+    startX: this.x,
+    startY: this.y,
+  };
+}
 
-  /**
-   * allows endboss to move in different directions with different speeds.
-   */
-  moveWithSpeedAndHeight(targetX, targetY, duration, callback) {
-    const startTime = Date.now();
-    const startX = this.x;
-    const startY = this.y;
-    const distances = {
-      x: targetX - startX,
-      y: targetY - startY,
-    };
+/**
+ * Calculates the distances to move from start to target coordinates.
+ * @param {number} targetX - The target x-coordinate.
+ * @param {number} targetY - The target y-coordinate.
+ * @param {number} startX - The starting x-coordinate.
+ * @param {number} startY - The starting y-coordinate.
+ * @returns {{x: number, y: number}} An object with the x and y distances.
+ */
+calculateDistances(targetX, targetY, startX, startY) {
+  return {
+    x: targetX - startX,
+    y: targetY - startY,
+  };
+}
 
-    this.startMovement(
-      startTime,
-      duration,
-      distances,
-      targetX,
-      targetY,
-      callback
-    );
-  }
+/**
+ * Initiates movement to a target position over a specified duration with a callback.
+ * @param {number} targetX - The target x-coordinate to move to.
+ * @param {number} targetY - The target y-coordinate to move to.
+ * @param {number} duration - The duration of the movement in milliseconds.
+ * @param {Function} callback - The function to call when the movement is complete.
+ */
+moveWithSpeedAndHeight(targetX, targetY, duration, callback) {
+  const { startTime, startX, startY } = this.getMovementStartData();
+  const distances = this.calculateDistances(targetX, targetY, startX, startY);
+  
+  this.startMovement(
+    startTime,
+    duration,
+    distances,
+    targetX,
+    targetY,
+    callback
+  );
+}
 
   /**
    * Starts the movement animation to a target position.
